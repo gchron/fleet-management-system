@@ -1,4 +1,4 @@
-package pl.sda.model;
+package pl.sda.fleetmanagementsystem.model;
 
 import lombok.Getter;
 import lombok.Setter;
