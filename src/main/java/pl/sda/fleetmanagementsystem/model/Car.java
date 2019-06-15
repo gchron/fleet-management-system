@@ -18,4 +18,5 @@ public class Car {
     private Double engineCapacity;
     private Driver driver;
     private TechnicalInspection technicalInspection;
+    private Set<CarAccident> carAccident;
 }
