@@ -1,5 +1,7 @@
 package pl.sda.fleetmanagementsystem.model;
 
+import pl.sda.fleetmanagementsystem.dto.CarDto;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -22,5 +24,19 @@ public class Car {
     private TechnicalInspection technicalInspection;
 
     @OneToMany
-    private Set<CarAccident> carAccident;
+    private Set<CarAccident> carAccidents;
+
+    public CarDto toDto(){
+        return CarDto.builder()
+                .id(id)
+                .brand(brand)
+                .model(model)
+                .productionYear(productionYear)
+                .mileage(mileage)
+                .engineCapacity(engineCapacity)
+                .driver(driver)
+                .technicalInspection(technicalInspection)
+                .carAccidents(carAccidents)
+                .build();
+    }
 }

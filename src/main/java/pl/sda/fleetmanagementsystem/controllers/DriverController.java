@@ -11,7 +11,7 @@ import java.util.List;
  * @author Mariusz Kowalczuk
  */
 @Controller
-@RequestMapping("drivers")
+@RequestMapping("/drivers")
 public class DriverController {
 
     private DriverService driverService;
@@ -21,8 +21,8 @@ public class DriverController {
     }
 
     @RequestMapping({"", "/"})
-    public ModelAndView findAllDrivers() {
-        ModelAndView modelAndView = new ModelAndView("index.html");
+    public ModelAndView showAllDrivers() {
+        ModelAndView modelAndView = new ModelAndView("drivers/index.html");
         modelAndView.addObject("drivers", driverService.findAll());
         return modelAndView;
     }
