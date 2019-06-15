@@ -3,6 +3,7 @@ package pl.sda.fleetmanagementsystem.model;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import java.util.Set;
 
 /**
  * @author Mariusz Kowalczuk
