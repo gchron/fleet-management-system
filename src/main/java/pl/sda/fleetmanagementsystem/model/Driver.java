@@ -17,4 +17,7 @@ public class Driver extends User {
     @OneToMany
     private Set<Car> cars;
 
+    @OneToMany
+    private Set<PetrolBill> bills;
+
 }
