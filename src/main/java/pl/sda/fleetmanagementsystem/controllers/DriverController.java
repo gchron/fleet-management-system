@@ -19,7 +19,9 @@ public class DriverController {
     }
 
     @RequestMapping({"", "/"})
-    public ModelAndView findAllDrivers() {
+
+    public ModelAndView showAllDrivers() {
+
         ModelAndView modelAndView = new ModelAndView("drivers/index.html");
         modelAndView.addObject("drivers", driverService.findAll());
         return modelAndView;
