@@ -6,7 +6,6 @@ import pl.sda.fleetmanagementsystem.dto.DriverDto;
 import pl.sda.fleetmanagementsystem.model.Driver;
 import pl.sda.fleetmanagementsystem.repository.DriverRepository;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -14,10 +13,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class DriverFinder implements DriverService {
 
-    private DriverRepository driverRepository;
+    private final DriverRepository driverRepository;
 
     public Set<DriverDto> findAll() {
-
         return driverRepository.findAll().stream().map(Driver::toDto).collect(Collectors.toSet());
 
     }

@@ -16,8 +16,8 @@
     </thead>
     <tbody>
     <tr th:each="driver : ${drivers}">
-        <td th:text="${driver.username}"><td>
-        <td th:text="${driver.drivingLicense}"></td>
+        <td th:text="${driver.userName}"><td>
+        <td th:text="${driver.getDrivingLicense().getNumber()}"></td>
         <!--<td th:text="${driver.cars}">Buck</td>-->
     </tr>
     </tbody>

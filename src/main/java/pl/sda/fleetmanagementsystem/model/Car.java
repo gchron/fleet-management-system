@@ -2,7 +2,13 @@ package pl.sda.fleetmanagementsystem.model;
 
 import pl.sda.fleetmanagementsystem.dto.CarDto;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import java.util.Set;
 
 @Entity
@@ -26,7 +32,7 @@ public class Car {
     @OneToMany
     private Set<CarAccident> carAccidents;
 
-    public CarDto toDto(){
+    public CarDto toDto() {
         return CarDto.builder()
                 .id(id)
                 .brand(brand)

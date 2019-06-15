@@ -1,13 +1,21 @@
 package pl.sda.fleetmanagementsystem.model;
 
-import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
+import lombok.Getter;
+import lombok.ToString;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import java.time.LocalDate;
 
 /**
  * @author Mariusz Kowalczuk
  */
 @Entity
+@ToString
+@Getter
 public class DrivingLicense {
 
     @Id

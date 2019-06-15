@@ -14,8 +14,7 @@ import pl.sda.fleetmanagementsystem.service.CarService;
 @RequestMapping("/cars")
 public class CarController {
 
-    private CarService carService;
-
+    private final CarService carService;
 
     @RequestMapping({"", "/"})
     public ModelAndView findAllCars(){
