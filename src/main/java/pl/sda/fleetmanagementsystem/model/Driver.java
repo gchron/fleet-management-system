@@ -1,5 +1,8 @@
 package pl.sda.fleetmanagementsystem.model;
 
+import lombok.Builder;
+import pl.sda.fleetmanagementsystem.dto.DriverDto;
+
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -8,6 +11,7 @@ import java.util.Set;
 /**
  * @author Mariusz Kowalczuk
  */
+
 @Entity
 public class Driver extends User {
 
@@ -19,5 +23,10 @@ public class Driver extends User {
 
     @OneToMany
     private Set<PetrolBill> bills;
+
+    public DriverDto toDto(){
+        return DriverDto.builder().userName(getUserName()).cars(cars).drivingLicense(drivingLicense).build();
+
+    }
 
 }
