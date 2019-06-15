@@ -5,8 +5,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import pl.sda.fleetmanagementsystem.service.DriverService;
 
-import java.util.List;
-
 /**
  * @author Mariusz Kowalczuk
  */
@@ -21,7 +19,9 @@ public class DriverController {
     }
 
     @RequestMapping({"", "/"})
+
     public ModelAndView showAllDrivers() {
+
         ModelAndView modelAndView = new ModelAndView("drivers/index.html");
         modelAndView.addObject("drivers", driverService.findAll());
         return modelAndView;
