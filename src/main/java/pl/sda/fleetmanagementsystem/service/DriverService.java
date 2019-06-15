@@ -1,7 +1,13 @@
 package pl.sda.fleetmanagementsystem.service;
 
-import org.springframework.data.repository.CrudRepository;
+
 import pl.sda.fleetmanagementsystem.model.Driver;
 
-public interface DriverService extends CrudRepository<Driver, Integer> {
+import java.util.Set;
+
+public interface DriverService {
+
+    Set<Driver> findAll();
+
+    Driver findById(Integer id);
 }

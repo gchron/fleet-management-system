@@ -18,6 +18,4 @@ public class PetrolBill {
     private Integer id;
     private BigDecimal value;
     private LocalDate date;
-
-
 }
