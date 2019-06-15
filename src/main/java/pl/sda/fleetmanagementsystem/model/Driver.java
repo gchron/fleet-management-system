@@ -1,6 +1,5 @@
 package pl.sda.fleetmanagementsystem.model;
 
-import lombok.Builder;
 import pl.sda.fleetmanagementsystem.dto.DriverDto;
 
 import javax.persistence.Entity;
