@@ -11,7 +11,6 @@ import javax.persistence.*;
 @Getter
 @Setter
 @MappedSuperclass
-@Entity
 public class User {
 
     @Id

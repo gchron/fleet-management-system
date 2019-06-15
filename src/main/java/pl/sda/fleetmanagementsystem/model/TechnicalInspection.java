@@ -14,7 +14,7 @@ public class TechnicalInspection {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @OneToOne
-    private Car carId;
+    private Car car;
     private LocalDate dateOfNextInspection;
 
 }

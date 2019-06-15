@@ -1,9 +1,6 @@
 package pl.sda.fleetmanagementsystem.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -17,7 +14,13 @@ public class Car {
     private String productionYear;
     private String mileage;
     private Double engineCapacity;
+
+    @ManyToOne
     private Driver driver;
+
+    @OneToOne
     private TechnicalInspection technicalInspection;
+
+    @OneToMany
     private Set<CarAccident> carAccident;
 }
