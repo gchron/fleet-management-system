@@ -2,7 +2,7 @@ package pl.sda.fleetmanagementsystem.dto;
 
 import lombok.*;
 
-import java.util.Set;
+import java.time.LocalDate;
 
 /**
  * @author Mariusz Kowalczuk
@@ -12,11 +12,12 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DriverDto {
+public class CarAccidentDto {
+
     private Integer id;
-    private String userName;
-    private String password;
-    private DrivingLicenseDto drivingLicenseDto;
-    private Set<CarDto> carsDtos;
+    private CarDto carDto;
+    private DriverDto driverDto;
+    private LocalDate accidentDate;
+    private String description;
 
 }

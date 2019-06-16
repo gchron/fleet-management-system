@@ -24,7 +24,8 @@ public class Driver extends User {
     private Set<PetrolBill> bills;
 
     public DriverDto toDto(){
-        return DriverDto.builder().userName(getUserName()).cars(cars).drivingLicense(drivingLicense).build();
+        return DriverDto.builder()
+
 
     }
 

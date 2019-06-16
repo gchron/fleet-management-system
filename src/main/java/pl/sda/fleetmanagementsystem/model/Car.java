@@ -2,14 +2,9 @@ package pl.sda.fleetmanagementsystem.model;
 
 import pl.sda.fleetmanagementsystem.dto.CarDto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 public class Car {
@@ -40,9 +35,14 @@ public class Car {
                 .productionYear(productionYear)
                 .mileage(mileage)
                 .engineCapacity(engineCapacity)
-                .driver(driver)
-                .technicalInspection(technicalInspection)
-                .carAccidents(carAccidents)
+                .driverDto(driver.toDto())
+                .technicalInspectionDto(technicalInspection.toDto())
+                .carAccidentsDtos(
+                        carAccidents
+                        .stream()
+                        .map(carAccident -> carAccident.toDto())
+                                .collect(Collectors.toSet()))
                 .build();
+
     }
 }

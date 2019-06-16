@@ -2,12 +2,9 @@ package pl.sda.fleetmanagementsystem.model;
 
 import lombok.Getter;
 import lombok.ToString;
+import pl.sda.fleetmanagementsystem.dto.DrivingLicenseDto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 /**
@@ -27,6 +24,16 @@ public class DrivingLicense {
 
     @OneToOne
     private Driver driver;
+
+    public DrivingLicenseDto toDto(){
+        return DrivingLicenseDto
+                .builder()
+                .id(id)
+                .expireDate(expireDate)
+                .number(number)
+                .driverDto(driver.toDto())
+                .build();
+    }
 
 
 
