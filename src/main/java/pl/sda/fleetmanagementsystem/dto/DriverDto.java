@@ -1,8 +1,6 @@
 package pl.sda.fleetmanagementsystem.dto;
 
 import lombok.*;
-import pl.sda.fleetmanagementsystem.model.Car;
-import pl.sda.fleetmanagementsystem.model.DrivingLicense;
 
 import java.util.Set;
 
@@ -15,8 +13,11 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DriverDto {
+    private Integer id;
     private String userName;
-    private DrivingLicense drivingLicense;
-    private Set<Car> cars;
+    private String password;
+    private DrivingLicenseDto drivingLicenseDto;
+    private Set<CarDto> carsDtos;
+    private Set<PetrolBillDto> petrolBillDtos;
 
 }

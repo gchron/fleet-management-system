@@ -3,7 +3,7 @@ package pl.sda.fleetmanagementsystem.model;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import pl.sda.fleetmanagementsystem.dto.PetroBillDto;
+import pl.sda.fleetmanagementsystem.dto.PetrolBillDto;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,8 +27,8 @@ public class PetrolBill {
     private BigDecimal value;
     private LocalDate date;
 
-    public PetroBillDto toDto(){
-        return PetroBillDto.builder()
+    public PetrolBillDto toDto(){
+        return PetrolBillDto.builder()
                 .id(id)
                 .value(value)
                 .date(date)
