@@ -1,6 +1,10 @@
 package pl.sda.fleetmanagementsystem.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pl.sda.fleetmanagementsystem.model.Driver;
 
 import java.util.Set;
@@ -23,6 +27,10 @@ public class DriverDto {
 
 
     public Driver toEntity() {
-        return null;
+        Driver driver = new Driver();
+        driver.setId(id);
+        driver.setUserName(userName);
+        driver.setDrivingLicense(drivingLicenseDto.toEntity());
+        return driver;
     }
 }
