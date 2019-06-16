@@ -14,11 +14,11 @@ import java.util.stream.Collectors;
  */
 @Service
 @RequiredArgsConstructor
-public class CarFinder implements CarService {
+public class CarFinder {
 
     private final CarRepository carRepository;
 
-    @Override
+
     public Set<CarDto> findAll() {
         return carRepository.findAll().stream().map(Car::toDto).collect(Collectors.toSet());
     }

@@ -1,6 +1,7 @@
 package pl.sda.fleetmanagementsystem.dto;
 
 import lombok.*;
+import pl.sda.fleetmanagementsystem.model.Driver;
 
 import java.util.Set;
 
@@ -20,4 +21,8 @@ public class DriverDto {
     private Set<CarDto> carsDtos;
     private Set<PetrolBillDto> petrolBillDtos;
 
+
+    public Driver toEntity() {
+        return null;
+    }
 }

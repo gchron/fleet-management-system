@@ -1,11 +1,19 @@
 package pl.sda.fleetmanagementsystem.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 import pl.sda.fleetmanagementsystem.dto.CarAccidentDto;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
+@Getter
+@Setter
+@AllArgsConstructor
 @Entity
+@Builder
 public class CarAccident {
 
     @Id

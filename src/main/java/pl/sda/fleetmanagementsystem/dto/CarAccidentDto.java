@@ -1,6 +1,7 @@
 package pl.sda.fleetmanagementsystem.dto;
 
 import lombok.*;
+import pl.sda.fleetmanagementsystem.model.CarAccident;
 
 import java.time.LocalDate;
 
@@ -20,4 +21,13 @@ public class CarAccidentDto {
     private LocalDate accidentDate;
     private String description;
 
+    public CarAccident toEntity() {
+        return CarAccident.builder()
+                .car(carDto.toEntity())
+                .driver(driverDto.toEntity())
+                .accidentDate(accidentDate)
+                .description(description)
+                .build();
+
+    }
 }

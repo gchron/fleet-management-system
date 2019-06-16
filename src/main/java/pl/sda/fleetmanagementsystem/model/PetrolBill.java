@@ -1,6 +1,7 @@
 package pl.sda.fleetmanagementsystem.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import pl.sda.fleetmanagementsystem.dto.PetrolBillDto;
@@ -19,6 +20,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @AllArgsConstructor
+@Builder
 public class PetrolBill {
 
     @Id
