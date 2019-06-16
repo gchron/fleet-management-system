@@ -1,12 +1,18 @@
 package pl.sda.fleetmanagementsystem.model;
 
+import lombok.*;
 import pl.sda.fleetmanagementsystem.dto.CarDto;
 
 import javax.persistence.*;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Getter
+@Setter
+@AllArgsConstructor
 @Entity
+@Builder
+@RequiredArgsConstructor
 public class Car {
 
     @Id

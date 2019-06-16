@@ -1,6 +1,7 @@
 package pl.sda.fleetmanagementsystem.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import pl.sda.fleetmanagementsystem.dto.AdministratorDto;
@@ -13,6 +14,7 @@ import javax.persistence.Entity;
 @Getter
 @Setter
 @AllArgsConstructor
+@Builder
 @Entity
 public class Administrator extends User {
 

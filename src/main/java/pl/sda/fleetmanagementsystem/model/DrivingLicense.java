@@ -1,7 +1,9 @@
 package pl.sda.fleetmanagementsystem.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.ToString;
+import lombok.Setter;
 import pl.sda.fleetmanagementsystem.dto.DrivingLicenseDto;
 
 import javax.persistence.*;
@@ -10,9 +12,11 @@ import java.time.LocalDate;
 /**
  * @author Mariusz Kowalczuk
  */
-@Entity
-@ToString
 @Getter
+@Setter
+@AllArgsConstructor
+@Entity
+@Builder
 public class DrivingLicense {
 
     @Id
