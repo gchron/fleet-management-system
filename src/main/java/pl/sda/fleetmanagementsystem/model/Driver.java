@@ -1,5 +1,9 @@
 package pl.sda.fleetmanagementsystem.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 import pl.sda.fleetmanagementsystem.dto.DriverDto;
 
 import javax.persistence.Entity;
@@ -12,7 +16,11 @@ import java.util.stream.Collectors;
  * @author Mariusz Kowalczuk
  */
 
+@Getter
+@Setter
+@AllArgsConstructor
 @Entity
+@Builder
 public class Driver extends User {
 
     @OneToOne
