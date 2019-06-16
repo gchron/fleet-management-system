@@ -28,6 +28,4 @@ public class DrivingLicense {
     @OneToOne
     private Driver driver;
 
-
-
 }

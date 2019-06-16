@@ -1,14 +1,27 @@
 package pl.sda.fleetmanagementsystem.service;
 
 
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 import pl.sda.fleetmanagementsystem.dto.DriverDto;
 import pl.sda.fleetmanagementsystem.model.Driver;
+import pl.sda.fleetmanagementsystem.repository.DriverRepository;
 
-import java.util.Set;
+@AllArgsConstructor
+@Service
+public class DriverService {
 
-public interface DriverService {
+    private final DriverRepository driverRepository;
 
-    Set<DriverDto> findAll();
+    public void create(DriverDto dto) {
+        Driver driver = new Driver();
+        driver.setId(dto.getId());
+        driver.setUserName(dto.getUserName());
+        driver.setPassword(dto.getPassword());
+        driver.setDrivingLicense(dto.getDrivingLicense());
+        driver.setCars(dto.getCars());
+        driver.setBills(dto.getBills());
 
-    DriverDto findById(Integer id);
+        driverRepository.save(driver);
+    }
 }

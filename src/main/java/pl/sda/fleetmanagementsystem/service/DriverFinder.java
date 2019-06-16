@@ -11,18 +11,16 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class DriverFinder implements DriverService {
+public class DriverFinder {
 
     private final DriverRepository driverRepository;
 
     public Set<DriverDto> findAll() {
         return driverRepository.findAll().stream().map(Driver::toDto).collect(Collectors.toSet());
-
     }
 
     public DriverDto findById(Integer id) {
         return driverRepository.findById(id).map(Driver::toDto).orElse(null);
     }
 
-    //??
 }
