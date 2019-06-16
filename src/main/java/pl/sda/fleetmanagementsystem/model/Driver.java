@@ -3,6 +3,7 @@ package pl.sda.fleetmanagementsystem.model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.sda.fleetmanagementsystem.dto.DriverDto;
 
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Builder
 public class Driver extends User {

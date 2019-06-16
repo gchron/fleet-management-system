@@ -7,6 +7,8 @@ import pl.sda.fleetmanagementsystem.dto.DriverDto;
 import pl.sda.fleetmanagementsystem.model.Driver;
 import pl.sda.fleetmanagementsystem.repository.DriverRepository;
 
+import java.util.stream.Collectors;
+
 @AllArgsConstructor
 @Service
 public class DriverService {
@@ -18,9 +20,9 @@ public class DriverService {
         driver.setId(dto.getId());
         driver.setUserName(dto.getUserName());
         driver.setPassword(dto.getPassword());
-        driver.setDrivingLicense(dto.getDrivingLicense());
-        driver.setCars(dto.getCars());
-        driver.setBills(dto.getBills());
+        driver.setDrivingLicense(dto.getDrivingLicenseDto().toEntity());
+        driver.setCars(dto.getCarsDtos().stream().map(carDtos -> carDtos.toEntity()).collect(Collectors.toSet()));
+        driver.setBills(dto.getPetrolBillDtos().stream().map(pbBillDtos -> pbBillDtos.toEntity()).collect(Collectors.toSet()));
 
         driverRepository.save(driver);
     }
