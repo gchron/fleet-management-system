@@ -1,10 +1,8 @@
 package pl.sda.fleetmanagementsystem.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import pl.sda.fleetmanagementsystem.dto.TechnicalInspectionDto;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -17,4 +15,12 @@ public class TechnicalInspection {
     private Car car;
     private LocalDate dateOfNextInspection;
 
+    public TechnicalInspectionDto toDto() {
+        return TechnicalInspectionDto
+                .builder()
+                .id(id)
+                .carDto(car.toDto())
+                .dateOfNextInspection(dateOfNextInspection)
+                .build();
+    }
 }

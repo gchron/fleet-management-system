@@ -1,10 +1,8 @@
 package pl.sda.fleetmanagementsystem.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import pl.sda.fleetmanagementsystem.dto.CarAccidentDto;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -15,11 +13,22 @@ public class CarAccident {
     private Integer id;
 
     @ManyToOne
-    private Car carId;
+    private Car car;
 
     @ManyToOne
-    private Driver driverId;
+    private Driver driver;
     private LocalDate accidentDate;
     private String description;
+
+    public CarAccidentDto toDto(){
+        return CarAccidentDto
+                .builder()
+                .id(id)
+                .carDto(car.toDto())
+                .driverDto(driver.toDto())
+                .accidentDate(accidentDate)
+                .description(description)
+                .build();
+    }
 
 }
