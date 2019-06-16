@@ -22,4 +22,5 @@ public class CarFinder {
     public Set<CarDto> findAll() {
         return carRepository.findAll().stream().map(Car::toDto).collect(Collectors.toSet());
     }
+
 }

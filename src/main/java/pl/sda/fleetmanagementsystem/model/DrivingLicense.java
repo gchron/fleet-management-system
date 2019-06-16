@@ -1,9 +1,6 @@
 package pl.sda.fleetmanagementsystem.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import pl.sda.fleetmanagementsystem.dto.DrivingLicenseDto;
 
 import javax.persistence.*;
@@ -15,6 +12,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Builder
 public class DrivingLicense {
@@ -35,7 +33,7 @@ public class DrivingLicense {
                 .id(id)
                 .expireDate(expireDate)
                 .number(number)
-                .driverDto(driver.toDto())
+                //.driverDto(driver.toDto())
                 .build();
     }
 
