@@ -1,8 +1,10 @@
 package pl.sda.fleetmanagementsystem.dto;
 
-import lombok.*;
-
-import java.util.Set;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * @author Mariusz Kowalczuk
@@ -16,8 +18,5 @@ public class DriverDto {
     private Integer id;
     private String userName;
     private String password;
-    private DrivingLicenseDto drivingLicenseDto;
-    private Set<CarDto> carsDtos;
-    private Set<PetrolBillDto> petrolBillDtos;
 
 }
