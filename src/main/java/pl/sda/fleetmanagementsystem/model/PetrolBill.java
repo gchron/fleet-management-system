@@ -1,5 +1,10 @@
 package pl.sda.fleetmanagementsystem.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import pl.sda.fleetmanagementsystem.dto.PetroBillDto;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +16,9 @@ import java.time.LocalDate;
  * @author Mariusz Kowalczuk
  */
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
 public class PetrolBill {
 
     @Id
@@ -18,4 +26,12 @@ public class PetrolBill {
     private Integer id;
     private BigDecimal value;
     private LocalDate date;
+
+    public PetroBillDto toDto(){
+        return PetroBillDto.builder()
+                .id(id)
+                .value(value)
+                .date(date)
+                .build();
+    }
 }
