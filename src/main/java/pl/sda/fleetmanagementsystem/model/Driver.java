@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author Mariusz Kowalczuk
@@ -25,6 +26,13 @@ public class Driver extends User {
 
     public DriverDto toDto(){
         return DriverDto.builder()
+                .id(getId())
+                .userName(getUserName())
+                .password(getPassword())
+                .drivingLicenseDto(drivingLicense.toDto())
+                .carsDtos(cars.stream().map(car -> car.toDto()).collect(Collectors.toSet()))
+                .petrolBillDtos(bills.stream().map(bill -> bill.toDto()).collect(Collectors.toSet()))
+                .build();
 
 
     }

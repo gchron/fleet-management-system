@@ -18,5 +18,6 @@ public class DriverDto {
     private String password;
     private DrivingLicenseDto drivingLicenseDto;
     private Set<CarDto> carsDtos;
+    private Set<PetrolBillDto> petrolBillDtos;
 
 }
