@@ -29,6 +29,4 @@ public class CarDto {
     private Driver driver;
     private TechnicalInspection technicalInspection;
     private Set<CarAccident> carAccidents;
-
-
 }
