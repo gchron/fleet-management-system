@@ -77,7 +77,7 @@ public class CarController {
     String setInspectionDate(@ModelAttribute CarInspectionAssignmentDto assignment) {
         carService.setTechnicalInspection(assignment.getCarId(), LocalDate.parse(assignment.getDateOfNextInspection()));
 
-        return "redirect:/cars/index.html";
+        return "redirect:/";
 
     }
 }
