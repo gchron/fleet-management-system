@@ -18,7 +18,7 @@ public class DriverService {
         driver.setId(dto.getId());
         driver.setUserName(dto.getUserName());
         driver.setPassword(dto.getPassword());
-        driver.setDrivingLicense(dto.getDrivingLicenseDto().toEntity());
+        driver.setDrivingLicense(dto.getDrivingLicenseDto()!= null? dto.getDrivingLicenseDto().toEntity():null);
 //        driver.setCars(dto.getCarsDtos().stream().map(carDtos -> carDtos.toEntity()).collect(Collectors.toSet()));
 //        driver.setBills(dto.getPetrolBillDtos().stream().map(pbBillDtos -> pbBillDtos.toEntity()).collect(Collectors.toSet()));
 
