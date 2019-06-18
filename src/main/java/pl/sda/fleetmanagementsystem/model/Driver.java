@@ -1,10 +1,6 @@
 package pl.sda.fleetmanagementsystem.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import pl.sda.fleetmanagementsystem.dto.DriverDto;
 
 import javax.persistence.Entity;
@@ -39,7 +35,7 @@ public class Driver extends User {
                 .id(getId())
                 .userName(getUserName())
                 .password(getPassword())
-                .drivingLicenseDto(drivingLicense.toDto())
+                .drivingLicenseDto(drivingLicense != null? drivingLicense.toDto():null)
                 .carsDtos(cars.stream().map(car -> car.toDto()).collect(Collectors.toSet()))
                 .petrolBillDtos(bills.stream().map(bill -> bill.toDto()).collect(Collectors.toSet()))
                 .build();

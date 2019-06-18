@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import pl.sda.fleetmanagementsystem.dto.CarAssignmentDto;
-import pl.sda.fleetmanagementsystem.dto.CarDriverAssignmentDto;
-import pl.sda.fleetmanagementsystem.dto.CarInspectionAssignmentDto;
-import pl.sda.fleetmanagementsystem.dto.NewCarDto;
+import pl.sda.fleetmanagementsystem.dto.*;
 import pl.sda.fleetmanagementsystem.service.CarFinder;
 import pl.sda.fleetmanagementsystem.service.CarService;
 import pl.sda.fleetmanagementsystem.service.DriverFinder;
@@ -44,7 +41,7 @@ public class CarController {
     String createCar(@ModelAttribute NewCarDto car) {
         carService.create(car);
 
-        return "redirect:/cars/index.html";
+        return "redirect:/cars";
 
     }
 
@@ -62,7 +59,7 @@ public class CarController {
     String setDriver(@ModelAttribute CarDriverAssignmentDto assignment) {
         carService.setDriver(assignment.getCarId(), assignment.getDriverId());
 
-        return "redirect:/cars/index.html";
+        return "redirect:/cars";
 
     }
 
@@ -78,11 +75,11 @@ public class CarController {
     String setInspectionDate(@ModelAttribute CarInspectionAssignmentDto assignment) {
         carService.setTechnicalInspection(assignment.getCarId(), LocalDate.parse(assignment.getDateOfNextInspection()));
 
-        return "redirect:/cars/index.html";
+        return "redirect:/cars";
 
     }
 
-    @GetMapping("/delete")
+    @GetMapping("/deleteFromList")
     ModelAndView deleteCar() {
         ModelAndView modelAndView = new ModelAndView("cars/delete.html");
         modelAndView.addObject("cars", carFinder.findAll());
@@ -90,10 +87,57 @@ public class CarController {
         return modelAndView;
 
     }
-    @PostMapping("/delete")
-    String deleteCar(@ModelAttribute CarAssignmentDto assignment){
+
+    @PostMapping("/deleteFromList")
+    String deleteCar(@ModelAttribute CarAssignmentDto assignment) {
         carService.delete(assignment.getCarId());
-        return "redirect:/cars/index.html";
+        return "redirect:/cars";
     }
+    @GetMapping("/delete")
+    String deleteCar(@RequestParam Integer id){
+        carService.delete(id);
+        return "redirect:/cars";
+    }
+    //TODO
+//    @PostMapping("/update/{carId}")
+//    String updateCar(@PathVariable Integer carId){
+//        carService.update(carId);
+//        return "redirect:/cars/index.html";
+//    }
+
+    @GetMapping("/update")
+    ModelAndView updateCar() {
+        ModelAndView modelAndView = new ModelAndView("cars/update.html");
+        modelAndView.addObject("cars", carFinder.findAll());
+        modelAndView.addObject("car", new UpdateCarDto());
+        return modelAndView;
+
+    }
+
+    @PostMapping("/update")
+    String updateCar(@ModelAttribute UpdateCarDto car) {
+        carService.update(car);
+        return "redirect:/cars";
+
+    }
+
+    @GetMapping("/show")
+    public ModelAndView showCarsList() {
+        ModelAndView modelAndView = new ModelAndView("cars/show.html");
+        modelAndView.addObject("cars", carFinder.findAll());
+        return modelAndView;
+    }
+
+    @GetMapping("/details/{carId}")
+    public ModelAndView showCarDetails(@PathVariable Integer carId) {
+        ModelAndView modelAndView = new ModelAndView("cars/details.html");
+        modelAndView.addObject("car", carFinder.findById(carId));
+
+
+        return modelAndView;
+
+
+    }
+
 }
 

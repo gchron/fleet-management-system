@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.sda.fleetmanagementsystem.dto.NewCarDto;
+import pl.sda.fleetmanagementsystem.dto.UpdateCarDto;
 import pl.sda.fleetmanagementsystem.model.Car;
 import pl.sda.fleetmanagementsystem.repository.CarRepository;
 import pl.sda.fleetmanagementsystem.repository.DriverRepository;
@@ -52,4 +53,22 @@ public class CarService {
     public void delete(Integer carId) {
         carRepository.delete(carRepository.findById(carId).orElseThrow(IllegalArgumentException::new));
     }
-}
+
+    @Transactional
+    public void update(UpdateCarDto carDto) {
+        Car car = carRepository.findById(carDto.getId()).orElseThrow(IllegalArgumentException::new);
+        car.setBrand(carDto.getBrand());
+        car.setModel(carDto.getModel());
+        car.setEngineCapacity(carDto.getEngineCapacity());
+        car.setMileage(carDto.getMileage());
+        car.setProductionYear(carDto.getProductionYear());
+
+
+
+    }
+
+
+
+
+    }
+

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Create Car</title>
+</head>
+<body>
+
+
+<form th:action="@{/cars/update}" method="POST" th:object="${car}">
+    <select th:field="*{id}">
+        <option th:each="oldCar : ${cars}" th:value="${oldCar.id}" th:text="${oldCar}"/>
+    </select>
+    <table>
+        <tr><td>Brand:</td><td><input type="text" id="brand" name="brand" th:value="${oldCar.brand}"/></td></tr>
+        <tr><td>Model:</td><td><input type="text" id="model" name="model" th:value="${car.model}"/></td></tr>
+        <tr><td>Production Year:</td><td><input type="text" id="productionYear" name="productionYear" th:value="${car.productionYear}"/></td></tr>
+        <tr><td>Mileage:</td><td><input type="text" id="mileage" name="mileage" th:value="${car.mileage}"/></td></tr>
+        <tr><td>Engine Capacity:</td><td><input type="text" id="engineCapacity" name="engineCapacity" th:value="${car.engineCapacity}"/></td></tr>
+
+        <tr><td></td><td> <button type="submit">Zatwierdź</button></td></tr>
+    </table>
+</form>
+
+</body>
+
+
+</html>
