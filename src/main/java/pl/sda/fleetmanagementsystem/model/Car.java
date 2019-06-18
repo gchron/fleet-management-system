@@ -4,6 +4,7 @@ import lombok.*;
 import pl.sda.fleetmanagementsystem.dto.CarDto;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -23,12 +24,12 @@ public class Car {
     private String productionYear;
     private String mileage;
     private Double engineCapacity;
+    private LocalDate dateOfNextInspection;
 
     @ManyToOne
     private Driver driver;
 
-    @OneToOne
-    private TechnicalInspection technicalInspection;
+    
 
     @OneToMany
     private Set<CarAccident> carAccidents;
@@ -41,8 +42,8 @@ public class Car {
                 .productionYear(productionYear)
                 .mileage(mileage)
                 .engineCapacity(engineCapacity)
-                .driverDto(driver.toDto())
-                .technicalInspectionDto(technicalInspection!= null?technicalInspection.toDto():null)
+                .dateOfNextInspection(dateOfNextInspection)
+                .driverDto(driver != null? driver.toDto():null)
                 .carAccidentsDtos(
                         carAccidents
                         .stream()

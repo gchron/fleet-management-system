@@ -17,7 +17,6 @@ public class DrivingLicenseDto {
     private Integer id;
     private LocalDate expireDate;
     private String number;
-    //private DriverDto driverDto;
 
     public DrivingLicense toEntity() {
         return DrivingLicense
@@ -25,7 +24,6 @@ public class DrivingLicenseDto {
                 .id(id)
                 .expireDate(expireDate)
                 .number(number)
-                //.driver(driverDto.toEntity())
                 .build();
     }
 }

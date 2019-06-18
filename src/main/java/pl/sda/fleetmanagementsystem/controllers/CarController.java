@@ -4,11 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import pl.sda.fleetmanagementsystem.dto.CarDriverAssigmentDto;
+import pl.sda.fleetmanagementsystem.dto.CarDriverAssignmentDto;
+import pl.sda.fleetmanagementsystem.dto.CarInspectionAssignmentDto;
 import pl.sda.fleetmanagementsystem.dto.NewCarDto;
 import pl.sda.fleetmanagementsystem.service.CarFinder;
 import pl.sda.fleetmanagementsystem.service.CarService;
 import pl.sda.fleetmanagementsystem.service.DriverFinder;
+
+import java.time.LocalDate;
 
 /**
  * @author Mariusz Kowalczuk
@@ -49,14 +52,30 @@ public class CarController {
         ModelAndView modelAndView = new ModelAndView("cars/setDriver.html");
         modelAndView.addObject("drivers", driverFinder.findAll());
         modelAndView.addObject("carId", carId);
-        modelAndView.addObject("assignment", new CarDriverAssigmentDto());
+        modelAndView.addObject("assignment", new CarDriverAssignmentDto());
         return modelAndView;
     }
 
 
     @PostMapping("/setDriver")
-    String setDriver(@ModelAttribute CarDriverAssigmentDto assignment) {
+    String setDriver(@ModelAttribute CarDriverAssignmentDto assignment) {
         carService.setDriver(assignment.getCarId(), assignment.getDriverId());
+
+        return "redirect:/cars/index.html";
+
+    }
+
+    @GetMapping("/getCarsList")
+    ModelAndView getCarsList() {
+        ModelAndView modelAndView = new ModelAndView("cars/getCarsList.html");
+        modelAndView.addObject("cars", carFinder.findAll());
+        modelAndView.addObject("assignment", new CarInspectionAssignmentDto());
+        return modelAndView;
+    }
+
+    @PostMapping("/getCarsList")
+    String setInspectionDate(@ModelAttribute CarInspectionAssignmentDto assignment) {
+        carService.setTechnicalInspection(assignment.getCarId(), LocalDate.parse(assignment.getDateOfNextInspection()));
 
         return "redirect:/cars/index.html";
 

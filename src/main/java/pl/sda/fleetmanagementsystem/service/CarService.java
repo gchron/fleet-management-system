@@ -8,6 +8,8 @@ import pl.sda.fleetmanagementsystem.model.Car;
 import pl.sda.fleetmanagementsystem.repository.CarRepository;
 import pl.sda.fleetmanagementsystem.repository.DriverRepository;
 
+import java.time.LocalDate;
+
 /**
  * @author Mariusz Kowalczuk
  */
@@ -39,6 +41,11 @@ public class CarService {
                 .setDriver(driverRepository.
                         findById(driverId).orElseThrow(IllegalArgumentException::new));
 
+
+    }
+    @Transactional
+    public  void setTechnicalInspection(Integer carId, LocalDate dateOfNextInspection){
+        carRepository.findById(carId).orElseThrow(IllegalArgumentException::new).setDateOfNextInspection(dateOfNextInspection);
 
     }
 }
