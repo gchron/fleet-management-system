@@ -42,7 +42,7 @@ public class Car {
                 .mileage(mileage)
                 .engineCapacity(engineCapacity)
                 .driverDto(driver.toDto())
-                .technicalInspectionDto(technicalInspection.toDto())
+                .technicalInspectionDto(technicalInspection!= null?technicalInspection.toDto():null)
                 .carAccidentsDtos(
                         carAccidents
                         .stream()
