@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import pl.sda.fleetmanagementsystem.dto.DriverDto;
-import pl.sda.fleetmanagementsystem.dto.DrivingLicenseDto;
 import pl.sda.fleetmanagementsystem.service.DriverFinder;
 import pl.sda.fleetmanagementsystem.service.DriverService;
 
@@ -35,7 +34,7 @@ public class DriverController {
     ModelAndView createDriverView() {
         ModelAndView modelAndView = new ModelAndView("drivers/create.html");
         modelAndView.addObject("driver", new DriverDto());
-        modelAndView.addObject("drivingLicense", new DrivingLicenseDto());
+//        modelAndView.addObject("drivingLicense", new DrivingLicenseDto());
 
         return modelAndView;
     }

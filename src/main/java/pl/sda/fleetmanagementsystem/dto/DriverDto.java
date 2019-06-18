@@ -27,10 +27,10 @@ public class DriverDto {
 
 
     public Driver toEntity() {
-        Driver driver = new Driver();
-        driver.setId(id);
-        driver.setUserName(userName);
-        driver.setDrivingLicense(drivingLicenseDto.toEntity());
-        return driver;
+        return Driver.builder()
+                .id(id)
+                .userName(userName)
+                .drivingLicense(drivingLicenseDto.toEntity())
+                .build();
     }
 }

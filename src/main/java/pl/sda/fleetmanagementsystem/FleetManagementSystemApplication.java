@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
-@PropertySource(value = {"application.properties", "application-ext.properties"},
+@PropertySource(value = {"application.properties", "application-ex.properties"},
         ignoreResourceNotFound = true)
 public class FleetManagementSystemApplication {
 

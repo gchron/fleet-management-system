@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create driver</title>
 </head>
 <body>
 <form th:action="@{/drivers/create}" method="POST" th:object="${driver}">
