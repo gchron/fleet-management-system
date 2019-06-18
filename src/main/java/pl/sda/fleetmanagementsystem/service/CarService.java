@@ -48,4 +48,8 @@ public class CarService {
         carRepository.findById(carId).orElseThrow(IllegalArgumentException::new).setDateOfNextInspection(dateOfNextInspection);
 
     }
+
+    public void delete(Integer carId) {
+        carRepository.delete(carRepository.findById(carId).orElseThrow(IllegalArgumentException::new));
+    }
 }
