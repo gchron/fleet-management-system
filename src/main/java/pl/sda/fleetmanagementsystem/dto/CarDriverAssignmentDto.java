@@ -6,7 +6,7 @@ import lombok.Data;
  * @author Mariusz Kowalczuk
  */
 @Data
-public class CarDriverAssigmentDto {
+public class CarDriverAssignmentDto {
     private Integer carId;
     private Integer driverId;
 }

@@ -33,7 +33,6 @@ public class DrivingLicense {
                 .id(id)
                 .expireDate(expireDate)
                 .number(number)
-                //.driverDto(driver.toDto())
                 .build();
     }
 

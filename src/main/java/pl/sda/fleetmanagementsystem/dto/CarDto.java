@@ -3,6 +3,7 @@ package pl.sda.fleetmanagementsystem.dto;
 import lombok.*;
 import pl.sda.fleetmanagementsystem.model.Car;
 
+import java.time.LocalDate;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class CarDto {
     private Integer id;
     private String brand;
@@ -22,7 +24,7 @@ public class CarDto {
     private String mileage;
     private Double engineCapacity;
     private DriverDto driverDto;
-    private TechnicalInspectionDto technicalInspectionDto;
+    private LocalDate dateOfNextInspection;
     private Set<CarAccidentDto> carAccidentsDtos;
 
     public Car toEntity(){
@@ -32,8 +34,8 @@ public class CarDto {
                 .productionYear(productionYear)
                 .mileage(mileage)
                 .engineCapacity(engineCapacity)
+                .dateOfNextInspection(dateOfNextInspection)
                 .driver(driverDto.toEntity())
-                .technicalInspection(technicalInspectionDto.toEntity())
                 .carAccidents(carAccidentsDtos.stream().map(carAccidentDto -> carAccidentDto.toEntity()).collect(Collectors.toSet()))
                 .build();
     }

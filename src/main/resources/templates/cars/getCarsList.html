@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title></title>
+</head>
+<body>
+<form th:action="@{/cars/getCarsList}" method="POST" th:object="${assignment}">
+    <select th:field="*{carId}">
+        <option th:each="car : ${cars}" th:value="${car.id}" th:text="${car}"></option>
+
+
+    </select>
+    <input type=date id="dateOfNextInspection" name="dateOfNextInspection" th:value="${dateOfNextInspection}"/>
+    <button type="submit">Zatwierdź</button>
+</form>
+
+
+</body>
+</html>
