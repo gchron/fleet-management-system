@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import pl.sda.fleetmanagementsystem.dto.CarAssignmentDto;
 import pl.sda.fleetmanagementsystem.dto.CarDriverAssignmentDto;
 import pl.sda.fleetmanagementsystem.dto.CarInspectionAssignmentDto;
 import pl.sda.fleetmanagementsystem.dto.NewCarDto;
@@ -65,20 +66,34 @@ public class CarController {
 
     }
 
-    @GetMapping("/getCarsList")
-    ModelAndView getCarsList() {
-        ModelAndView modelAndView = new ModelAndView("cars/getCarsList.html");
+    @GetMapping("/setTechnicalInspection")
+    ModelAndView setInspectionDate() {
+        ModelAndView modelAndView = new ModelAndView("cars/setTechnicalInspection.html");
         modelAndView.addObject("cars", carFinder.findAll());
         modelAndView.addObject("assignment", new CarInspectionAssignmentDto());
         return modelAndView;
     }
 
-    @PostMapping("/getCarsList")
+    @PostMapping("/setTechnicalInspection")
     String setInspectionDate(@ModelAttribute CarInspectionAssignmentDto assignment) {
         carService.setTechnicalInspection(assignment.getCarId(), LocalDate.parse(assignment.getDateOfNextInspection()));
 
         return "redirect:/cars/index.html";
 
+    }
+
+    @GetMapping("/delete")
+    ModelAndView deleteCar() {
+        ModelAndView modelAndView = new ModelAndView("cars/delete.html");
+        modelAndView.addObject("cars", carFinder.findAll());
+        modelAndView.addObject("assignment", new CarAssignmentDto());
+        return modelAndView;
+
+    }
+    @PostMapping("/delete")
+    String deleteCar(@ModelAttribute CarAssignmentDto assignment){
+        carService.delete(assignment.getCarId());
+        return "redirect:/cars/index.html";
     }
 }
 
