@@ -7,6 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 import pl.sda.fleetmanagementsystem.dto.DriverDto;
 import pl.sda.fleetmanagementsystem.dto.DriverLicenseAssignmentDto;
 import pl.sda.fleetmanagementsystem.dto.DrivingLicenseDto;
+import pl.sda.fleetmanagementsystem.service.CarFinder;
 import pl.sda.fleetmanagementsystem.service.DriverFinder;
 import pl.sda.fleetmanagementsystem.service.DriverService;
 
@@ -20,6 +21,7 @@ public class DriverController {
 
     private DriverFinder driverFinder;
     private DriverService driverService;
+    private CarFinder carFinder;
 
     @RequestMapping({"", "/"})
     public ModelAndView showAllDrivers() {
@@ -44,7 +46,7 @@ public class DriverController {
         return "redirect:/drivers";
     }
 
-    @GetMapping("/main/{id}")
+    @GetMapping("/drivers/main/{id}")
     ModelAndView showUser(@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView("drivers/main.html");
         modelAndView.addObject("driver", driverFinder.findById(id));
@@ -55,17 +57,37 @@ public class DriverController {
     @GetMapping("/setDrivingLicense")
     ModelAndView setDrivingLicense(@RequestParam String id) {
 
-        ModelAndView modelAndView = new ModelAndView("drivers/setDrivingLicense");
+        ModelAndView modelAndView = new ModelAndView("drivers/setDrivingLicense.html");
         modelAndView.addObject("driverId", id);
         modelAndView.addObject("assignment", new DriverLicenseAssignmentDto());
         return modelAndView;
     }
 
-    @PostMapping("setDrivingLicense")
+    @PostMapping("/setDrivingLicense")
     String setDrivingLicense(@ModelAttribute DriverLicenseAssignmentDto assignment) {
 
         driverService.setDrivingLicense(Integer.valueOf(assignment.getDriverId()), assignment);
         return "redirect:/drivers";
 
     }
+
+    @GetMapping("/{id}/showCars")
+    ModelAndView showCarsOfDriver(@PathVariable Integer id) {
+        ModelAndView modelAndView = new ModelAndView("drivers/showCars.html");
+        modelAndView.addObject("cars", carFinder.findByDriverId(id));
+        return modelAndView;
+    }
+
+    @GetMapping("/cars/details/{carId}")
+    public ModelAndView showCarDetails(@PathVariable Integer carId) {
+        ModelAndView modelAndView = new ModelAndView("cars/details.html");
+        modelAndView.addObject("car", carFinder.findById(carId));
+
+
+        return modelAndView;
+
+
+    }
+
+
 }

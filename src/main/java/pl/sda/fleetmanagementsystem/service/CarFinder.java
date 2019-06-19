@@ -25,5 +25,9 @@ public class CarFinder {
     public CarDto findById(Integer carId){
         return carRepository.findById(carId).map(Car::toDto).orElseThrow(IllegalArgumentException::new);
     }
+    public Set<CarDto> findByDriverId(Integer driverId){
+        return carRepository.findByDriverId(driverId).stream().map(Car::toDto).collect(Collectors.toSet());
+
+    }
 
 }
