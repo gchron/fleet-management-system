@@ -45,7 +45,7 @@ public class CarController {
 
     }
 
-    @GetMapping("/{carId}/setDriver")
+    @GetMapping("/setDriver/{carId}")
     ModelAndView setDriver(@PathVariable Integer carId) {
         ModelAndView modelAndView = new ModelAndView("cars/setDriver.html");
         modelAndView.addObject("drivers", driverFinder.findAll());
