@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.sda.fleetmanagementsystem.dto.DriverDto;
 import pl.sda.fleetmanagementsystem.dto.DriverLicenseAssignmentDto;
+import pl.sda.fleetmanagementsystem.dto.DriverPetrolBillAssignmentDto;
 import pl.sda.fleetmanagementsystem.dto.DrivingLicenseDto;
 import pl.sda.fleetmanagementsystem.service.CarFinder;
 import pl.sda.fleetmanagementsystem.service.DriverFinder;
@@ -24,7 +25,7 @@ public class DriverController {
     private CarFinder carFinder;
 
     @RequestMapping({"", "/"})
-    public ModelAndView showAllDrivers() {
+    ModelAndView showAllDrivers() {
 
         ModelAndView modelAndView = new ModelAndView("drivers/index.html");
         modelAndView.addObject("drivers", driverFinder.findAll());
@@ -46,7 +47,7 @@ public class DriverController {
         return "redirect:/drivers";
     }
 
-    @GetMapping("/drivers/main/{id}")
+    @GetMapping("/main/{id}")
     ModelAndView showUser(@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView("drivers/main.html");
         modelAndView.addObject("driver", driverFinder.findById(id));
@@ -79,15 +80,25 @@ public class DriverController {
     }
 
     @GetMapping("/cars/details/{carId}")
-    public ModelAndView showCarDetails(@PathVariable Integer carId) {
+    ModelAndView showCarDetails(@PathVariable Integer carId) {
         ModelAndView modelAndView = new ModelAndView("cars/details.html");
         modelAndView.addObject("car", carFinder.findById(carId));
-
+        return modelAndView;
+    }
+    @GetMapping("/{id}/addBill")
+    ModelAndView addBill(@PathVariable Integer id) {
+        ModelAndView modelAndView = new ModelAndView("drivers/addBill.html");
+        modelAndView.addObject("bill", new DriverPetrolBillAssignmentDto());
+        modelAndView.addObject("driverId", id);
 
         return modelAndView;
-
-
     }
+    @PostMapping("/addBill")
+    String addBill(@ModelAttribute DriverPetrolBillAssignmentDto assignmentDto){
+        driverService.addBill(assignmentDto);
+        return "redirect:/drivers";
+    }
+
 
 
 }

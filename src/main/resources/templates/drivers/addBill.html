@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title></title>
+</head>
+<form th:action="@{/drivers/addBill}" method="POST" th:object="${assignment}">
+    <table>
+        <tr><td></td><td><input type="hidden" id="driverId" name="driverId" th:value="${driverId}"/></td></tr>
+
+        <tr><td>Date</td><td><input type="date" id="date" name="date" th:value="${date}"/></td></tr>
+        <tr><td>Value</td><td><input type="text" id="value" name="value" th:value="${value}"/></td></tr>
+
+        <tr><td></td><td> <button type="submit">Zatwierdź</button></td></tr>
+    </table>
+</form>
+
+
+</body>
+</html>

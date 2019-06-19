@@ -37,7 +37,6 @@ public class Driver extends User {
                 .password(getPassword())
                 .drivingLicenseDto(drivingLicense != null? drivingLicense.toDto():null)
                 .carsDtos(cars.stream().map(car -> car.toDto()).collect(Collectors.toSet()))
-                .petrolBillDtos(bills.stream().map(bill -> bill.toDto()).collect(Collectors.toSet()))
                 .build();
 
 

@@ -6,11 +6,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.sda.fleetmanagementsystem.dto.DriverDto;
 import pl.sda.fleetmanagementsystem.dto.DriverLicenseAssignmentDto;
+import pl.sda.fleetmanagementsystem.dto.DriverPetrolBillAssignmentDto;
 import pl.sda.fleetmanagementsystem.model.Driver;
 import pl.sda.fleetmanagementsystem.model.DrivingLicense;
+import pl.sda.fleetmanagementsystem.model.PetrolBill;
 import pl.sda.fleetmanagementsystem.repository.DriverRepository;
 import pl.sda.fleetmanagementsystem.repository.DrivingLicenseRepository;
+import pl.sda.fleetmanagementsystem.repository.PetrolBillRepository;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 
@@ -20,6 +24,7 @@ public class DriverService {
 
     private final DriverRepository driverRepository;
     private final DrivingLicenseRepository drivingLicenseRepository;
+    private final PetrolBillRepository petrolBillRepository;
 
     public void create(DriverDto dto) {
         Driver driver = new Driver();
@@ -41,6 +46,18 @@ public class DriverService {
         drivingLicense.setDriver(driver);
         drivingLicenseRepository.save(drivingLicense);
         driver.setDrivingLicense(drivingLicense);
+
+    }
+    @Transactional
+    public void addBill(DriverPetrolBillAssignmentDto assignment){
+        PetrolBill petrolBill = new PetrolBill();
+        Driver driver = driverRepository.findById(assignment.getDriverId()).orElseThrow(IllegalArgumentException::new);
+        petrolBill.setDriver(driver);
+        petrolBill.setDate(LocalDate.parse(assignment.getDate()));
+        petrolBill.setValue(BigDecimal.valueOf(assignment.getValue()));
+        petrolBillRepository.save(petrolBill);
+        driver.getBills().add(petrolBill);
+
 
     }
 }

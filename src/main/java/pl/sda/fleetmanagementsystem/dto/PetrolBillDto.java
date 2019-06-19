@@ -1,10 +1,6 @@
 package pl.sda.fleetmanagementsystem.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import pl.sda.fleetmanagementsystem.model.PetrolBill;
 
 import java.math.BigDecimal;
@@ -21,12 +17,13 @@ public class PetrolBillDto {
     private Integer id;
     private BigDecimal value;
     private LocalDate date;
+    private DriverDto driverDto;
 
     public PetrolBill toEntity() {
         return PetrolBill.builder()
-                .id(id)
                 .value(value)
                 .date(date)
+                .driver(driverDto != null ? driverDto.toEntity() : null)
                 .build();
     }
 }

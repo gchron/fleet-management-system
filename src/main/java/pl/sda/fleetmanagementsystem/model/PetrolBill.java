@@ -1,15 +1,9 @@
 package pl.sda.fleetmanagementsystem.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import pl.sda.fleetmanagementsystem.dto.PetrolBillDto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -20,6 +14,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class PetrolBill {
 
@@ -29,11 +24,15 @@ public class PetrolBill {
     private BigDecimal value;
     private LocalDate date;
 
-    public PetrolBillDto toDto(){
+    @ManyToOne
+    private Driver driver;
+
+    public PetrolBillDto toDto() {
         return PetrolBillDto.builder()
                 .id(id)
                 .value(value)
                 .date(date)
+                .driverDto(driver != null ? driver.toDto() : null)
                 .build();
     }
 }
