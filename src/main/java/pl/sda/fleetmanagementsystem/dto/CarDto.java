@@ -35,7 +35,7 @@ public class CarDto {
                 .mileage(mileage)
                 .engineCapacity(engineCapacity)
                 .dateOfNextInspection(dateOfNextInspection)
-                .driver(driverDto.toEntity())
+                .driver(driverDto!=null? driverDto.toEntity():null)
                 .carAccidents(carAccidentsDtos.stream().map(carAccidentDto -> carAccidentDto.toEntity()).collect(Collectors.toSet()))
                 .build();
     }
