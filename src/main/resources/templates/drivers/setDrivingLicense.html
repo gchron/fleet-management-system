@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title></title>
+</head>
+<form th:action="@{/drivers/setDrivingLicense}" method="POST" th:object="${assignment}">
+    <table>
+        <tr><td></td><td><input type="hidden" id="driverId" name="driverId" th:value="${driverId}"/></td></tr>
+
+        <tr><td>Expire Date</td><td><input type="date" id="expireDate" name="expireDate" th:value="${expireDate}"/></td></tr>
+        <tr><td>Number</td><td><input type="text" id="number" name="number" th:value="${number}"/></td></tr>
+
+        <tr><td></td><td> <button type="submit">Zatwierdź</button></td></tr>
+    </table>
+</form>
+
+
+</body>
+</html>

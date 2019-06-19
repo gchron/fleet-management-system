@@ -21,7 +21,6 @@ public class DrivingLicenseDto {
     public DrivingLicense toEntity() {
         return DrivingLicense
                 .builder()
-                .id(id)
                 .expireDate(expireDate)
                 .number(number)
                 .build();
