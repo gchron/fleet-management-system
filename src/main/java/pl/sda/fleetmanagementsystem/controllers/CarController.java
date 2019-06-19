@@ -98,23 +98,17 @@ public class CarController {
         carService.delete(id);
         return "redirect:/cars";
     }
-    //TODO
-//    @PostMapping("/update/{carId}")
-//    String updateCar(@PathVariable Integer carId){
-//        carService.update(carId);
-//        return "redirect:/cars/index.html";
-//    }
 
-    @GetMapping("/update")
-    ModelAndView updateCar() {
-        ModelAndView modelAndView = new ModelAndView("cars/update.html");
-        modelAndView.addObject("cars", carFinder.findAll());
-        modelAndView.addObject("car", new UpdateCarDto());
+
+    @GetMapping("/edit")
+    ModelAndView updateCar(@RequestParam Integer id) {
+        ModelAndView modelAndView = new ModelAndView("cars/edit.html");
+        modelAndView.addObject("car", carFinder.findById(id));
         return modelAndView;
 
     }
 
-    @PostMapping("/update")
+    @PostMapping("/edit")
     String updateCar(@ModelAttribute UpdateCarDto car) {
         carService.update(car);
         return "redirect:/cars";

@@ -21,7 +21,7 @@
         <td><span th:text="${car.productionYear}"/></td>
         <td><span th:text="${car.mileage}"/></td>
         <td><span th:text="${car.engineCapacity}"/></td>
-        <td><a th:href="@{../cars/edit?id=} + ${car.id}">Edytuj</a></td>
+        <td><a th:href="@{../edit?id=} + ${car.id}">Edytuj</a></td>
         <td><a th:href="@{../delete?id=} + ${car.id}">Usuń</a></td>
     </tbody>
 
