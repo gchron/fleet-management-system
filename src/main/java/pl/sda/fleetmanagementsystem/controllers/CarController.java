@@ -122,7 +122,7 @@ public class CarController {
         return modelAndView;
     }
 
-    @GetMapping("/details/{carId}")
+    @GetMapping({"/details/{carId}", "drivers/cars/details/{carId}"})
     public ModelAndView showCarDetails(@PathVariable Integer carId) {
         ModelAndView modelAndView = new ModelAndView("cars/details.html");
         modelAndView.addObject("car", carFinder.findById(carId));
