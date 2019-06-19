@@ -98,12 +98,7 @@ public class CarController {
         carService.delete(id);
         return "redirect:/cars";
     }
-    //TODO
-//    @PostMapping("/update/{carId}")
-//    String updateCar(@PathVariable Integer carId){
-//        carService.update(carId);
-//        return "redirect:/cars/index.html";
-//    }
+
 
     @GetMapping("/edit")
     ModelAndView updateCar(@RequestParam Integer id) {
