@@ -10,15 +10,13 @@
     <thead>
     <tr>
         <th>Username</th>
-        <th>Driving License</th>
-        <th>Cars</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="driver : ${drivers}">
+    <tr>
         <td th:text="${driver.userName}"><td>
-        <td th:text="${driver.drivingLicenseDto}"></td>
-        <!--<td th:text="${driver.cars}">Buck</td>-->
+        <td><a th:href="@{../setDrivingLicense?id=} + ${driver.id}">Dodaj/Edytuj prawo jazdy</a></td>
+
     </tr>
     </tbody>
 

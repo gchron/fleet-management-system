@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title></title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Brand</th>
+        <th>Model</th>
+        <th>Production Year</th>
+        <th>Mileage</th>
+        <th>Engine Capacity</th>
+    </tr>
+    </thead>
+    <tbody>
+        <td><span th:text="${car.brand}"/></td>
+        <td><span th:text="${car.model}"/></td>
+        <td><span th:text="${car.productionYear}"/></td>
+        <td><span th:text="${car.mileage}"/></td>
+        <td><span th:text="${car.engineCapacity}"/></td>
+        <td><a th:href="@{../edit?id=} + ${car.id}">Edytuj</a></td>
+        <td><a th:href="@{../delete?id=} + ${car.id}">Usuń</a></td>
+        <td><a th:href="@{../setDriver/} + ${car.id}">Dodaj kierowcę</a></td>
+    </tbody>
+
+
+</table>
+
+
+</body>
+</html>
