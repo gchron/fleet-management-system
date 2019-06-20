@@ -17,6 +17,7 @@ public class PetrolBillDto {
     private Integer id;
     private BigDecimal value;
     private LocalDate date;
+    private boolean settled;
     private DriverDto driverDto;
 
     public PetrolBill toEntity() {
@@ -24,6 +25,7 @@ public class PetrolBillDto {
                 .value(value)
                 .date(date)
                 .driver(driverDto != null ? driverDto.toEntity() : null)
+                .settled(settled)
                 .build();
     }
 }

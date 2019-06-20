@@ -12,5 +12,4 @@ public interface CarRepository extends JpaRepository<Car, Integer> {
 
     Set<Car> findByDriverId(Integer driverId);
 
-    Set<Car> findByDriver(Integer driverId);
 }

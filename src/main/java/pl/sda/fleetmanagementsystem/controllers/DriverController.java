@@ -4,13 +4,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import pl.sda.fleetmanagementsystem.dto.DriverDto;
-import pl.sda.fleetmanagementsystem.dto.DriverLicenseAssignmentDto;
-import pl.sda.fleetmanagementsystem.dto.DriverPetrolBillAssignmentDto;
-import pl.sda.fleetmanagementsystem.dto.DrivingLicenseDto;
-import pl.sda.fleetmanagementsystem.service.CarFinder;
-import pl.sda.fleetmanagementsystem.service.DriverFinder;
-import pl.sda.fleetmanagementsystem.service.DriverService;
+import pl.sda.fleetmanagementsystem.dto.*;
+import pl.sda.fleetmanagementsystem.service.*;
 
 /**
  * @author Mariusz Kowalczuk
@@ -23,6 +18,9 @@ public class DriverController {
     private DriverFinder driverFinder;
     private DriverService driverService;
     private CarFinder carFinder;
+    private PetrolBillFinder petrolBillFinder;
+    private PetrolBillService petrolBillService;
+    private PaymentService paymentService;
 
     @RequestMapping({"", "/"})
     ModelAndView showAllDrivers() {
@@ -85,6 +83,7 @@ public class DriverController {
         modelAndView.addObject("car", carFinder.findById(carId));
         return modelAndView;
     }
+
     @GetMapping("/{id}/addBill")
     ModelAndView addBill(@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView("drivers/addBill.html");
@@ -93,12 +92,28 @@ public class DriverController {
 
         return modelAndView;
     }
+
     @PostMapping("/addBill")
-    String addBill(@ModelAttribute DriverPetrolBillAssignmentDto assignmentDto){
+    String addBill(@ModelAttribute DriverPetrolBillAssignmentDto assignmentDto) {
         driverService.addBill(assignmentDto);
         return "redirect:/drivers";
     }
 
+    @GetMapping("/{driverId}/preparePayment")
+    ModelAndView preparePayment(@PathVariable Integer driverId) {
+
+        ModelAndView modelAndView = new ModelAndView("drivers/preparePayment.html");
+        modelAndView.addObject("value", petrolBillService.computeValue(petrolBillFinder.findUnsettledBillofDriver(driverId)));
+        modelAndView.addObject("driverId", driverId);
+        modelAndView.addObject("payment", new PetrolBillDriverAssignment());
+        return modelAndView;
+    }
+    @PostMapping("/preparePayment")
+    String preparePayment(@ModelAttribute PetrolBillDriverAssignment assignment){
+        paymentService.create(assignment);
+        return "redirect:/drivers";
+
+    }
 
 
 }

@@ -23,6 +23,7 @@ public class PetrolBill {
     private Integer id;
     private BigDecimal value;
     private LocalDate date;
+    private boolean settled;
 
     @ManyToOne
     private Driver driver;
@@ -32,6 +33,7 @@ public class PetrolBill {
                 .id(id)
                 .value(value)
                 .date(date)
+                .settled(settled)
                 .driverDto(driver != null ? driver.toDto() : null)
                 .build();
     }
