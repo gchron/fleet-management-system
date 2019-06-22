@@ -28,9 +28,20 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute CreateUserAssignment assignment){
-        userService.register(assignment);
-        return "redirect:/";
+    public String registerUser(@ModelAttribute CreateUserAssignment assignment) {
+        try{
+
+            userService.register(assignment);
+        }
+        catch (RuntimeException exception){
+            return "redirect:/register";
+
+
+        }
+        finally {
+            return "redirect:/login";
+
+        }
     }
 
 

@@ -31,14 +31,22 @@ public class UserService {
 
     //TODO: obsłużyć wyjątek dotyczący próby użycia tego samego loginu
 
-    public void register(CreateUserAssignment createUserAssignment) {
+    public void register(CreateUserAssignment createUserAssignment){
 
         User user = User.builder()
                 .userName(createUserAssignment.getUserName())
                 .password(passwordEncoder.encode(createUserAssignment.getPassword()))
                 .roles(getUserRoles(createUserAssignment))
                 .build();
-        userRepository.save(user);
+        try{
+
+            userRepository.save(user);
+        }
+        catch (RuntimeException e){
+            System.out.println(e.getStackTrace());
+
+
+        }
 
         switch (createUserAssignment.getRoleId()) {
             case 1:
