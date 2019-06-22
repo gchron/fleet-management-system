@@ -1,16 +1,8 @@
 package pl.sda.fleetmanagementsystem.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@Setter
-@Getter
+@Data
 public class UserDto {
     private String userName;
     private String password;

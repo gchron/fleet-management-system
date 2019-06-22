@@ -1,6 +1,9 @@
 package pl.sda.fleetmanagementsystem.model;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pl.sda.fleetmanagementsystem.dto.DriverDto;
 
 import javax.persistence.Entity;
@@ -15,11 +18,23 @@ import java.util.stream.Collectors;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Builder
+
 public class Driver extends User {
+    public Driver(DrivingLicense drivingLicense, Set<Car> cars, Set<PetrolBill> bills) {
+        this.drivingLicense = drivingLicense;
+        this.cars = cars;
+        this.bills = bills;
+    }
+
+    @Builder
+    public Driver(Integer id, String userName, String password, Set<UserRole> roles, DrivingLicense drivingLicense, Set<Car> cars, Set<PetrolBill> bills) {
+        super(id, userName, password, roles);
+        this.drivingLicense = drivingLicense;
+        this.cars = cars;
+        this.bills = bills;
+    }
 
     @OneToOne
     private DrivingLicense drivingLicense;

@@ -5,9 +5,9 @@ package pl.sda.fleetmanagementsystem.repository;
  */
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import pl.sda.fleetmanagementsystem.model.UserRole;
 
-import javax.management.relation.Role;
 
-public interface RoleRepository extends JpaRepository<Integer, Role> {
+public interface RoleRepository extends JpaRepository<UserRole, Integer> {
 
 }
