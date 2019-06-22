@@ -5,30 +5,29 @@ import lombok.Getter;
 import lombok.Setter;
 import pl.sda.fleetmanagementsystem.dto.AdministratorDto;
 
-import javax.persistence.Entity;
-import java.util.Set;
+import javax.persistence.*;
 
 /**
  * @author Mariusz Kowalczuk
  */
 @Getter
 @Setter
-
 @Entity
-public class Administrator extends User {
-    public Administrator() {
-    }
+@Builder
+public class Administrator {
 
-    @Builder
-    public Administrator(Integer id, String userName, String password, Set<UserRole> roles) {
-        super(id, userName, password, roles);
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @OneToOne
+    private User user;
 
-    public AdministratorDto toDto() {
+    public AdministratorDto toDto(){
         return AdministratorDto.builder()
-                .id(super.getId())
-                .userName(super.getUserName())
-                .password(super.getPassword())
+                .userDto(user !=null ? user.toDto():null)
                 .build();
     }
+
+
+
 }

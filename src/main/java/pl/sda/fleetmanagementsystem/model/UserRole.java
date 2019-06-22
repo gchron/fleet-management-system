@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import pl.sda.fleetmanagementsystem.dto.UserRoleDto;
 
 import javax.persistence.*;
 
@@ -20,4 +21,13 @@ public class UserRole {
 
     @Column(unique = true)
     private String role;
+
+
+    public UserRoleDto toDto(){
+        return UserRoleDto.builder()
+                .id(id)
+                .role(role)
+                .build();
+
+    }
 }
