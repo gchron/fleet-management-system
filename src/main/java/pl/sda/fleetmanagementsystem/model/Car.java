@@ -1,9 +1,18 @@
 package pl.sda.fleetmanagementsystem.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import pl.sda.fleetmanagementsystem.dto.CarDto;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.time.LocalDate;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -28,8 +37,6 @@ public class Car {
 
     @ManyToOne
     private Driver driver;
-
-    
 
     @OneToMany
     private Set<CarAccident> carAccidents;

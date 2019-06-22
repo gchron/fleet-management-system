@@ -2,9 +2,18 @@ package pl.sda.fleetmanagementsystem.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import pl.sda.fleetmanagementsystem.dto.*;
+import pl.sda.fleetmanagementsystem.dto.CarAssignmentDto;
+import pl.sda.fleetmanagementsystem.dto.CarDriverAssignmentDto;
+import pl.sda.fleetmanagementsystem.dto.CarInspectionAssignmentDto;
+import pl.sda.fleetmanagementsystem.dto.NewCarDto;
+import pl.sda.fleetmanagementsystem.dto.UpdateCarDto;
 import pl.sda.fleetmanagementsystem.service.CarFinder;
 import pl.sda.fleetmanagementsystem.service.CarService;
 import pl.sda.fleetmanagementsystem.service.DriverFinder;
@@ -93,6 +102,7 @@ public class CarController {
         carService.delete(assignment.getCarId());
         return "redirect:/cars";
     }
+
     @GetMapping("/delete")
     String deleteCar(@RequestParam Integer id){
         carService.delete(id);
