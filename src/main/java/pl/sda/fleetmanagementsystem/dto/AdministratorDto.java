@@ -1,10 +1,7 @@
 package pl.sda.fleetmanagementsystem.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import pl.sda.fleetmanagementsystem.model.Administrator;
 
 @Builder
 @Getter
@@ -14,6 +11,12 @@ import lombok.Setter;
 public class AdministratorDto {
 
     private Integer id;
-    private String userName;
-    private String password;
+    private UserDto userDto;
+
+    public Administrator toEntity(){
+        return Administrator
+                .builder()
+                .user(userDto.toEntity())
+                .build();
+    }
 }

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-import pl.sda.fleetmanagementsystem.dto.UserDto;
+import pl.sda.fleetmanagementsystem.dto.CreateUserAssignment;
 import pl.sda.fleetmanagementsystem.repository.RoleRepository;
 import pl.sda.fleetmanagementsystem.service.UserService;
 
@@ -23,12 +23,12 @@ public class UserController {
     public ModelAndView registerUser(){
         ModelAndView modelAndView = new ModelAndView("register.html");
         modelAndView.addObject("roles", roleRepository.findAll());
-        modelAndView.addObject("assignment", new UserDto());
+        modelAndView.addObject("assignment", new CreateUserAssignment());
         return modelAndView;
     }
 
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute UserDto assignment){
+    public String registerUser(@ModelAttribute CreateUserAssignment assignment){
         userService.register(assignment);
         return "redirect:/";
     }

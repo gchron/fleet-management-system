@@ -40,7 +40,7 @@ public class PrintController {
 
         document.open();
         Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
-        Chunk driverUsername = new Chunk(paymentDto.getDriverdto().getUserName(), font);
+        Chunk driverUsername = new Chunk(paymentDto.getDriverdto().getUserDto().getUserName(), font);
         Chunk value = new Chunk(paymentDto.getValue().toString(), font);
         document.add(driverUsername);
         document.add(value);

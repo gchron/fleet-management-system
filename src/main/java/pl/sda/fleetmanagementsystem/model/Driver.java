@@ -1,14 +1,9 @@
 package pl.sda.fleetmanagementsystem.model;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import pl.sda.fleetmanagementsystem.dto.DriverDto;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -20,21 +15,16 @@ import java.util.stream.Collectors;
 @Setter
 @NoArgsConstructor
 @Entity
+@Builder
+@AllArgsConstructor
+public class Driver {
 
-public class Driver extends User {
-    public Driver(DrivingLicense drivingLicense, Set<Car> cars, Set<PetrolBill> bills) {
-        this.drivingLicense = drivingLicense;
-        this.cars = cars;
-        this.bills = bills;
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    @Builder
-    public Driver(Integer id, String userName, String password, Set<UserRole> roles, DrivingLicense drivingLicense, Set<Car> cars, Set<PetrolBill> bills) {
-        super(id, userName, password, roles);
-        this.drivingLicense = drivingLicense;
-        this.cars = cars;
-        this.bills = bills;
-    }
+    @OneToOne
+    private User user;
 
     @OneToOne
     private DrivingLicense drivingLicense;
@@ -47,11 +37,11 @@ public class Driver extends User {
 
     public DriverDto toDto(){
         return DriverDto.builder()
-                .id(getId())
-                .userName(getUserName())
-                .password(getPassword())
+                .id(id)
+                .userDto(user!= null? user.toDto(): null)
                 .drivingLicenseDto(drivingLicense != null? drivingLicense.toDto():null)
                 .carsDtos(cars.stream().map(car -> car.toDto()).collect(Collectors.toSet()))
+                .petrolBillDtos(bills.stream().map(PetrolBill::toDto).collect(Collectors.toSet()))
                 .build();
 
 
