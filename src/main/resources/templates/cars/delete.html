@@ -5,7 +5,7 @@
     <title></title>
 </head>
 <body>
-<form th:action="@{/cars/delete}" th:method="POST" th:object="${assignment}">
+<form th:action="@{/cars/deleteFromList}" th:method="POST" th:object="${assignment}">
     <select th:field="*{carId}">
         <option th:each="car : ${cars}" th:value="${car.id}" th:text="${car}"/>
     </select>
