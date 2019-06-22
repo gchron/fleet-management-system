@@ -7,14 +7,15 @@
 <body>
 <form th:action="@{/register}" method="POST" th:object="${assignment}">
 
-    <tr><td>UserName</td><td><input type="text" id="userName" name="userName" th:value="${assignment.userName}"/></td></tr>
-    <tr><td>Password</td><td><input type="password" id="password" name="password" th:value="${assignment.password}"/></td></tr>    <button type="submit">Zatwierdź</button>
-    <tr><td>E-mail</td><td><input type="text" id="email" name="email" th:value="${assignment.email}"/></td></tr>    <button type="submit">Zatwierdź</button>
-    <select th:field="*{assignment.roleId}">
+    <tr><td>UserName</td><td><input type="text" id="userName" name="userName" th:value="${userName}"/></td></tr>
+    <tr><td>Password</td><td><input type="password" id="password" name="password" th:value="${password}"/></td></tr>
+    <tr><td>E-mail</td><td><input type="text" id="email" name="email" th:value="${email}"/></td></tr>
+    <select th:field="*{roleId}">
         <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.role}"></option>
 
 
     </select>
+    <button type="submit">Zatwierdź</button>
 </form>
 
 
