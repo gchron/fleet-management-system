@@ -1,6 +1,6 @@
 package pl.sda.fleetmanagementsystem.controllers;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,15 +12,15 @@ import pl.sda.fleetmanagementsystem.service.*;
  */
 @Controller
 @RequestMapping("/drivers")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class DriverController {
 
-    private DriverFinder driverFinder;
-    private DriverService driverService;
-    private CarFinder carFinder;
-    private PetrolBillFinder petrolBillFinder;
-    private PetrolBillService petrolBillService;
-    private PaymentService paymentService;
+    private final DriverFinder driverFinder;
+    private final DriverService driverService;
+    private final CarFinder carFinder;
+    private final PetrolBillFinder petrolBillFinder;
+    private final PetrolBillService petrolBillService;
+    private final PaymentService paymentService;
 
     @RequestMapping({"", "/"})
     ModelAndView showAllDrivers() {
@@ -114,6 +114,8 @@ public class DriverController {
         return "redirect:/drivers";
 
     }
+
+
 
 
 }
