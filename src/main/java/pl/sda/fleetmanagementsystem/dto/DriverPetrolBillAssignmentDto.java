@@ -7,7 +7,7 @@ import lombok.Data;
  */
 @Data
 public class DriverPetrolBillAssignmentDto {
-    private Integer driverId;
+    private Integer userId;
     private double value;
     private String date;
 

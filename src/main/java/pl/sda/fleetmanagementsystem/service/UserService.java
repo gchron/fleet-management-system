@@ -29,7 +29,6 @@ public class UserService {
     private final UserRepository userRepository;
     private final AdministratorRepository administratorRepository;
 
-    //TODO: obsłużyć wyjątek dotyczący próby użycia tego samego loginu
 
     public void register(CreateUserAssignment createUserAssignment){
 
@@ -44,8 +43,6 @@ public class UserService {
         }
         catch (RuntimeException e){
             System.out.println(e.getStackTrace());
-
-
         }
 
         switch (createUserAssignment.getRoleId()) {

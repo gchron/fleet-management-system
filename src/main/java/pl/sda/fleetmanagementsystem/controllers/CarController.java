@@ -1,19 +1,11 @@
 package pl.sda.fleetmanagementsystem.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import pl.sda.fleetmanagementsystem.dto.CarAssignmentDto;
-import pl.sda.fleetmanagementsystem.dto.CarDriverAssignmentDto;
-import pl.sda.fleetmanagementsystem.dto.CarInspectionAssignmentDto;
-import pl.sda.fleetmanagementsystem.dto.NewCarDto;
-import pl.sda.fleetmanagementsystem.dto.UpdateCarDto;
+import pl.sda.fleetmanagementsystem.dto.*;
 import pl.sda.fleetmanagementsystem.service.CarFinder;
 import pl.sda.fleetmanagementsystem.service.CarService;
 import pl.sda.fleetmanagementsystem.service.DriverFinder;
@@ -32,6 +24,7 @@ public class CarController {
     private final CarService carService;
     private final DriverFinder driverFinder;
 
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     @RequestMapping({"", "/"})
     ModelAndView findAllCars() {
         ModelAndView modelAndView = new ModelAndView("cars/index.html");
@@ -39,6 +32,7 @@ public class CarController {
         return modelAndView;
     }
 
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     @GetMapping("/create")
     ModelAndView createCar() {
         ModelAndView modelAndView = new ModelAndView("cars/create.html");
@@ -46,14 +40,16 @@ public class CarController {
         return modelAndView;
     }
 
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     @PostMapping("/create")
     String createCar(@ModelAttribute NewCarDto car) {
         carService.create(car);
 
-        return "redirect:/cars";
+        return "redirect:/";
 
     }
 
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     @GetMapping("/setDriver/{carId}")
     ModelAndView setDriver(@PathVariable Integer carId) {
         ModelAndView modelAndView = new ModelAndView("cars/setDriver.html");
@@ -64,30 +60,18 @@ public class CarController {
     }
 
 
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     @PostMapping("/setDriver")
     String setDriver(@ModelAttribute CarDriverAssignmentDto assignment) {
         carService.setDriver(assignment.getCarId(), assignment.getDriverId());
 
-        return "redirect:/cars";
+        return "redirect:/";
 
     }
 
-    @GetMapping("/setTechnicalInspection")
-    ModelAndView setInspectionDate() {
-        ModelAndView modelAndView = new ModelAndView("cars/setTechnicalInspection.html");
-        modelAndView.addObject("cars", carFinder.findAll());
-        modelAndView.addObject("assignment", new CarInspectionAssignmentDto());
-        return modelAndView;
-    }
 
-    @PostMapping("/setTechnicalInspection")
-    String setInspectionDate(@ModelAttribute CarInspectionAssignmentDto assignment) {
-        carService.setTechnicalInspection(assignment.getCarId(), LocalDate.parse(assignment.getDateOfNextInspection()));
 
-        return "redirect:/cars";
-
-    }
-
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     @GetMapping("/deleteFromList")
     ModelAndView deleteCar() {
         ModelAndView modelAndView = new ModelAndView("cars/delete.html");
@@ -96,20 +80,39 @@ public class CarController {
         return modelAndView;
 
     }
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
+    @GetMapping("/setTechnicalInspection")
+    ModelAndView setTechnicalInspectionDate(@RequestParam Integer id) {
+        ModelAndView modelAndView = new ModelAndView("cars/setTechnicalInspection.html");
+        modelAndView.addObject("assignment", new CarInspectionAssignmentDto());
+        modelAndView.addObject("car", carFinder.findById(id));
+        return modelAndView;
+    }
 
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
+    @PostMapping("/setTechnicalInspection")
+    String setTechnicalInspectionDate(@ModelAttribute CarInspectionAssignmentDto assignment) {
+        carService.setTechnicalInspection(assignment.getCarId(), LocalDate.parse(assignment.getDateOfNextInspection()));
+
+        return "redirect:/";
+
+    }
+
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     @PostMapping("/deleteFromList")
     String deleteCar(@ModelAttribute CarAssignmentDto assignment) {
         carService.delete(assignment.getCarId());
-        return "redirect:/cars";
+        return "redirect:/index";
     }
 
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     @GetMapping("/delete")
     String deleteCar(@RequestParam Integer id){
         carService.delete(id);
-        return "redirect:/cars";
+        return "redirect:/";
     }
 
-
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     @GetMapping("/edit")
     ModelAndView updateCar(@RequestParam Integer id) {
         ModelAndView modelAndView = new ModelAndView("cars/edit.html");
@@ -118,13 +121,15 @@ public class CarController {
 
     }
 
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     @PostMapping("/edit")
     String updateCar(@ModelAttribute UpdateCarDto car) {
         carService.update(car);
-        return "redirect:/cars";
+        return "redirect:/";
 
     }
 
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     @GetMapping("/show")
     public ModelAndView showCarsList() {
         ModelAndView modelAndView = new ModelAndView("cars/show.html");
@@ -132,7 +137,8 @@ public class CarController {
         return modelAndView;
     }
 
-    @GetMapping({"/details/{carId}", "drivers/cars/details/{carId}"})
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
+    @GetMapping("/details/{carId}")
     public ModelAndView showCarDetails(@PathVariable Integer carId) {
         ModelAndView modelAndView = new ModelAndView("cars/details.html");
         modelAndView.addObject("car", carFinder.findById(carId));

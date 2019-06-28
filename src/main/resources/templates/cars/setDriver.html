@@ -7,7 +7,7 @@
 <body>
 <form th:action="@{/cars/setDriver}" method="POST" th:object="${assignment}">
     <select th:field="*{driverId}">
-        <option th:each="driver : ${drivers}" th:value="${driver.id}" th:text="${driver.userName}"></option>
+        <option th:each="driver : ${drivers}" th:value="${driver.id}" th:text="${driver.getUserDto().getUserName()}"></option>
 
 
     </select>

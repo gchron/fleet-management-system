@@ -6,12 +6,9 @@
 </head>
 <body>
 <form th:action="@{/cars/setTechnicalInspection}" method="POST" th:object="${assignment}">
-    <select th:field="*{carId}">
-        <option th:each="car : ${cars}" th:value="${car.id}" th:text="${car}"></option>
 
-
-    </select>
     <input type=date id="dateOfNextInspection" name="dateOfNextInspection" th:value="${dateOfNextInspection}"/>
+    <input type=hidden id="carId" name="carId" th:value="${car.id}"/>
     <button type="submit">Zatwierdź</button>
 </form>
 

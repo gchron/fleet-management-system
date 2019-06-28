@@ -20,7 +20,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/register")
-    public ModelAndView registerUser(){
+    public ModelAndView registerUser() {
         ModelAndView modelAndView = new ModelAndView("register.html");
         modelAndView.addObject("roles", roleRepository.findAll());
         modelAndView.addObject("assignment", new CreateUserAssignment());
@@ -29,20 +29,12 @@ public class UserController {
 
     @PostMapping("/register")
     public String registerUser(@ModelAttribute CreateUserAssignment assignment) {
-        try{
 
-            userService.register(assignment);
-        }
-        catch (RuntimeException exception){
-            return "redirect:/register";
+        userService.register(assignment);
+        return "redirect:/login";
 
-
-        }
-        finally {
-            return "redirect:/login";
-
-        }
     }
-
-
 }
+
+
+
