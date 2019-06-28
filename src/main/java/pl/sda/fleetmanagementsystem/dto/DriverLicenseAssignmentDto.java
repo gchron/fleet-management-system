@@ -7,7 +7,7 @@ import lombok.Data;
  */
 @Data
 public class DriverLicenseAssignmentDto {
-    private String driverId;
+    private Integer userId;
     private String expireDate;
     private String number;
 }

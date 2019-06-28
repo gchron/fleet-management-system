@@ -21,9 +21,10 @@
         <td><span th:text="${car.productionYear}"/></td>
         <td><span th:text="${car.mileage}"/></td>
         <td><span th:text="${car.engineCapacity}"/></td>
-        <td><a th:href="@{../edit?id=} + ${car.id}">Edytuj</a></td>
-        <td><a th:href="@{../delete?id=} + ${car.id}">Usuń</a></td>
-        <td><a th:href="@{../setDriver/} + ${car.id}">Dodaj kierowcę</a></td>
+        <td><a th:href="@{../edit?id=} + ${car.id}">Edit</a></td>
+        <td><a th:href="@{../delete?id=} + ${car.id}">Delete</a></td>
+        <td><a th:href="@{../setDriver/} + ${car.id}">Add Driver</a></td>
+        <td><a th:href="@{../setTechnicalInspection?id=} + ${car.id}">Set Date of Next Technical Inspection</a></td>
     </tbody>
 
 
