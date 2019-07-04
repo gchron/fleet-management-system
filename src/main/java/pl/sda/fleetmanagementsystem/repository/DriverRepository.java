@@ -6,6 +6,6 @@ import pl.sda.fleetmanagementsystem.model.Driver;
 import java.util.Optional;
 
 public interface DriverRepository extends JpaRepository<Driver, Integer> {
-    public Optional<Driver> findByUserId(Integer id);
+     Optional<Driver> findByUserId(Integer id);
 
 }

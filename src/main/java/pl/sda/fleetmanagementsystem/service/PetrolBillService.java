@@ -14,7 +14,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class PetrolBillService {
     public BigDecimal computeValue(Set<PetrolBill> bills){
-        return bills.stream().map(petrolBill -> petrolBill.getValue()).reduce(BigDecimal::add).orElseThrow(IllegalArgumentException::new);
+        return bills.stream().map(petrolBill -> petrolBill.getValue()).reduce(BigDecimal::add).orElseThrow(()-> new IllegalArgumentException("There are no unsettled payments of this driver"));
 
 
     }

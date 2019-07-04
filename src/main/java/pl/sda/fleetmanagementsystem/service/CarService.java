@@ -45,8 +45,9 @@ public class CarService {
 
     }
     @Transactional
-    public  void setTechnicalInspection(Integer carId, LocalDate dateOfNextInspection){
-        carRepository.findById(carId).orElseThrow(IllegalArgumentException::new).setDateOfNextInspection(dateOfNextInspection);
+    public  void setTechnicalInspection(Integer carId, String dateOfNextInspection){
+        Car car = carRepository.findById(carId).orElseThrow(IllegalArgumentException::new);
+        car.setDateOfNextInspection(LocalDate.parse(dateOfNextInspection));
 
     }
 

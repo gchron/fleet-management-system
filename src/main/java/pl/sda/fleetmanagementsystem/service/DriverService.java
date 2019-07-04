@@ -30,14 +30,17 @@ public class DriverService {
 
     @Transactional
     public void setDrivingLicense(DriverLicenseAssignmentDto assignment){
+
+
         DrivingLicense drivingLicense = new DrivingLicense();
 
         Driver driver = driverRepository.findByUserId(getId(assignment.getUserId())).orElseThrow(IllegalArgumentException::new);
+        drivingLicense.setId(assignment.getId());
         drivingLicense.setExpireDate(LocalDate.parse(assignment.getExpireDate()));
         drivingLicense.setNumber(assignment.getNumber());
         drivingLicense.setDriver(driver);
         drivingLicenseRepository.save(drivingLicense);
-        //driver.setDrivingLicense(drivingLicense);
+        driver.setDrivingLicense(drivingLicense);
 
     }
 
@@ -54,7 +57,7 @@ public class DriverService {
 
 
     }
-    private Integer getId(Integer userId) {
+    protected Integer getId(Integer userId) {
         return userRepository.findById(userId).orElseThrow(IllegalAccessError::new).toDto().getId();
     }
 }

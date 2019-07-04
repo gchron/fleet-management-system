@@ -10,8 +10,6 @@ import pl.sda.fleetmanagementsystem.service.CarFinder;
 import pl.sda.fleetmanagementsystem.service.CarService;
 import pl.sda.fleetmanagementsystem.service.DriverFinder;
 
-import java.time.LocalDate;
-
 /**
  * @author Mariusz Kowalczuk
  */
@@ -92,7 +90,7 @@ public class CarController {
     @PreAuthorize("hasRole('ADMINISTRATOR')")
     @PostMapping("/setTechnicalInspection")
     String setTechnicalInspectionDate(@ModelAttribute CarInspectionAssignmentDto assignment) {
-        carService.setTechnicalInspection(assignment.getCarId(), LocalDate.parse(assignment.getDateOfNextInspection()));
+        carService.setTechnicalInspection(assignment.getCarId(), assignment.getDateOfNextInspection());
 
         return "redirect:/";
 

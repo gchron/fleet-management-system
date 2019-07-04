@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.sda.fleetmanagementsystem.dto.DriverLicenseAssignmentDto;
 import pl.sda.fleetmanagementsystem.dto.DriverPetrolBillAssignmentDto;
+import pl.sda.fleetmanagementsystem.dto.DrivingLicenseDto;
 import pl.sda.fleetmanagementsystem.dto.PetrolBillDriverAssignment;
 import pl.sda.fleetmanagementsystem.service.*;
 
@@ -28,6 +29,7 @@ public class DriverController {
     private final PetrolBillService petrolBillService;
     private final PaymentService paymentService;
     private final UserFinder userFinder;
+    private final DrivingLicenseFinder drivingLicenseFinder;
 
 
     @PreAuthorize("hasRole('ADMINISTRATOR')")
@@ -40,8 +42,8 @@ public class DriverController {
 
     @PreAuthorize("hasRole('ADMINISTRATOR')")
     @GetMapping("/{id}")
-    ModelAndView showUser(@PathVariable Integer id) {
-        ModelAndView modelAndView = new ModelAndView("drivers/main.html");
+    ModelAndView showDriver(@PathVariable Integer id) {
+        ModelAndView modelAndView = new ModelAndView("drivers/showDriver.html");
         modelAndView.addObject("driver", driverFinder.findById(id));
         return modelAndView;
 
@@ -52,8 +54,11 @@ public class DriverController {
     String setDrivingLicense(HttpServletRequest httpServletRequest, Model model) {
         try {
 
-            Integer id = userFinder.findByUserName(httpServletRequest.getUserPrincipal().getName()).getId();
-            model.addAttribute("userId", id);
+            Integer userId = userFinder.findByUserName(httpServletRequest.getUserPrincipal().getName()).getId();
+            DrivingLicenseDto drivingLicenseOfUser = drivingLicenseFinder.getDrivingLicenseOfUser(userId);
+
+            model.addAttribute("drivingLicense", drivingLicenseOfUser);
+            model.addAttribute("userId", userId);
             model.addAttribute("assignment", new DriverLicenseAssignmentDto());
 
         } catch (RuntimeException e) {
@@ -113,16 +118,21 @@ public class DriverController {
         return "redirect:/";
     }
 
-    //TODO: Tutaj przydałoby się zmienić na listę do wyboru, którego drivera chcemy rozliczyć
-    @PreAuthorize("hasRole('ADMINISTRATOR')")
-    @GetMapping("/{driverId}/preparePayment")
-    ModelAndView preparePayment(@PathVariable Integer driverId) {
 
-        ModelAndView modelAndView = new ModelAndView("drivers/preparePayment.html");
-        modelAndView.addObject("value", petrolBillService.computeValue(petrolBillFinder.findUnsettledBillofDriver(driverId)));
-        modelAndView.addObject("driverId", driverId);
-        modelAndView.addObject("payment", new PetrolBillDriverAssignment());
-        return modelAndView;
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
+    @GetMapping("/preparePayment")
+    String preparePayment(@RequestParam Integer driverId, Model model) {
+
+        try {
+
+            model.addAttribute("value", petrolBillService.computeValue(petrolBillFinder.findUnsettledBillofDriver(driverId)));
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            return "drivers/error";
+        }
+        model.addAttribute("driverId", driverId);
+        model.addAttribute("payment", new PetrolBillDriverAssignment());
+        return "drivers/preparePayment";
     }
 
     @PreAuthorize("hasRole('ADMINISTRATOR')")
