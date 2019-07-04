@@ -5,7 +5,7 @@
     <title></title>
 </head>
 <body>
-<a th:text="${value}"> Wartość
+Payment value: <a th:text="${value}">
 
 </a>
 <form th:action="@{/drivers/preparePayment}" method="POST" th:object="${assignment}">

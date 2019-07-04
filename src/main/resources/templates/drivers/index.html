@@ -11,14 +11,15 @@
     <tr>
         <th>Username</th>
         <th>Driving License</th>
-        <th>Cars</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="driver : ${drivers}">
-        <td th:text="${driver.userName}"><td>
+        <td th:text="${driver.getUserDto().getUserName()}"><td>
         <td th:text="${driver.drivingLicenseDto}"></td>
-        <!--<td th:text="${driver.cars}">Buck</td>-->
+        <td><a th:href="@{../drivers/} + ${driver.id}">Show Driver Details</a></td>
+
+
     </tr>
     </tbody>
 

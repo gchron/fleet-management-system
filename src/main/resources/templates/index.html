@@ -40,20 +40,12 @@
 <div sec:authorize="hasRole('ADMINISTRATOR')">
     <a th:href="@{/drivers}">Show all drivers</a>
 </div>
-<div sec:authorize="hasRole('ADMINISTRATOR')">
-    <a th:href="@{/drivers/preparePayment}">Prepare payment</a>
-</div>
-
 <div sec:authorize="hasRole('DRIVER')">
     <a th:href="@{/drivers/setDrivingLicense}">Add driving license</a>
 </div>
 <div sec:authorize="hasRole('DRIVER')">
     <a th:href="@{/drivers/addBill}">Add a new petrol bill</a>
 </div>
-
-
-
-
 
 
 </body>

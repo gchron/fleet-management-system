@@ -9,6 +9,6 @@ import java.util.Set;
  * @author Mariusz Kowalczuk
  */
 public interface PetrolBillRepository extends JpaRepository<PetrolBill, Integer> {
-    public Set<PetrolBill> findByDriver_Id(Integer driverId);
+    Set<PetrolBill> findByDriver_Id(Integer driverId);
 
 }

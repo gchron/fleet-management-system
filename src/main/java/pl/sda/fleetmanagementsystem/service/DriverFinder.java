@@ -23,4 +23,6 @@ public class DriverFinder {
         return driverRepository.findById(id).map(Driver::toDto).orElse(null);
     }
 
+    public DriverDto findByUserId(Integer id){return driverRepository.findByUserId(id).map(Driver::toDto).orElse(null);}
+
 }
