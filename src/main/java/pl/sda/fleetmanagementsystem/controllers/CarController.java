@@ -3,12 +3,13 @@ package pl.sda.fleetmanagementsystem.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.sda.fleetmanagementsystem.dto.*;
-import pl.sda.fleetmanagementsystem.service.CarFinder;
-import pl.sda.fleetmanagementsystem.service.CarService;
-import pl.sda.fleetmanagementsystem.service.DriverFinder;
+import pl.sda.fleetmanagementsystem.service.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Mariusz Kowalczuk
@@ -21,6 +22,8 @@ public class CarController {
     private final CarFinder carFinder;
     private final CarService carService;
     private final DriverFinder driverFinder;
+    private final UserFinder userFinder;
+    private final DriverService driverService;
 
     @PreAuthorize("hasRole('ADMINISTRATOR')")
     @RequestMapping({"", "/"})
@@ -144,6 +147,33 @@ public class CarController {
 
         return modelAndView;
 
+
+    }
+
+    //TODO Implement text area
+    @PreAuthorize("hasRole('DRIVER')")
+    @GetMapping("/reportAccident")
+    String reportAccident(HttpServletRequest httpServletRequest, Model model, @RequestParam Integer carId) {
+
+        try {
+
+            Integer userId = userFinder.findByUserName(httpServletRequest.getUserPrincipal().getName()).getId();
+            model.addAttribute("driverId", driverFinder.findByUserId(userId).getId());
+            model.addAttribute("carId", carId);
+            model.addAttribute("assignment", new DriverAccidentAssignment());
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            return "redirect:/error";
+        }
+        return "cars/reportAccident";
+
+    }
+
+    @PreAuthorize("hasRole('DRIVER')")
+    @PostMapping("/reportAccident")
+    String reportAccident(@ModelAttribute DriverAccidentAssignment assignment) {
+        driverService.reportAccident(assignment);
+        return "redirect:/";
 
     }
 

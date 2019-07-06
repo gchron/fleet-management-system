@@ -1,9 +1,6 @@
 package pl.sda.fleetmanagementsystem.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import pl.sda.fleetmanagementsystem.dto.CarAccidentDto;
 
 import javax.persistence.*;
@@ -14,6 +11,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Entity
 @Builder
+@RequiredArgsConstructor
 public class CarAccident {
 
     @Id
@@ -27,15 +25,17 @@ public class CarAccident {
     private Driver driver;
     private LocalDate accidentDate;
     private String description;
+    private boolean settled;
 
     public CarAccidentDto toDto(){
         return CarAccidentDto
                 .builder()
                 .id(id)
-                .carDto(car.toDto())
-                .driverDto(driver.toDto())
+                //.carDto(car.toDto())
+                //.driverDto(driver.toDto())
                 .accidentDate(accidentDate)
                 .description(description)
+                .settled(settled)
                 .build();
     }
 

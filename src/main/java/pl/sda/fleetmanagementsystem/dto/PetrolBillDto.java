@@ -18,13 +18,13 @@ public class PetrolBillDto {
     private BigDecimal value;
     private LocalDate date;
     private boolean settled;
-    private DriverDto driverDto;
+    //private DriverDto driverDto;
 
     public PetrolBill toEntity() {
         return PetrolBill.builder()
                 .value(value)
                 .date(date)
-                .driver(driverDto != null ? driverDto.toEntity() : null)
+                //.driver(driverDto != null ? driverDto.toEntity() : null)
                 .settled(settled)
                 .build();
     }
