@@ -16,15 +16,26 @@
     </tr>
     </thead>
     <tbody>
-        <td><span th:text="${car.brand}"/></td>
-        <td><span th:text="${car.model}"/></td>
-        <td><span th:text="${car.productionYear}"/></td>
-        <td><span th:text="${car.mileage}"/></td>
-        <td><span th:text="${car.engineCapacity}"/></td>
+    <td><span th:text="${car.brand}"/></td>
+    <td><span th:text="${car.model}"/></td>
+    <td><span th:text="${car.productionYear}"/></td>
+    <td><span th:text="${car.mileage}"/></td>
+    <td><span th:text="${car.engineCapacity}"/></td>
+    <div sec:authorize="hasRole('ADMINISTRATOR')">
         <td><a th:href="@{../edit?id=} + ${car.id}">Edit</a></td>
+    </div>
+    <div sec:authorize="hasRole('ADMINISTRATOR')">
         <td><a th:href="@{../delete?id=} + ${car.id}">Delete</a></td>
+    </div>
+    <div sec:authorize="hasRole('ADMINISTRATOR')">
         <td><a th:href="@{../setDriver/} + ${car.id}">Add Driver</a></td>
+    </div>
+    <div sec:authorize="hasRole('ADMINISTRATOR')">
         <td><a th:href="@{../setTechnicalInspection?id=} + ${car.id}">Set Date of Next Technical Inspection</a></td>
+    </div>
+    <div sec:authorize="hasRole('DRIVER')">
+        <td><a th:href="@{cars/reportAccident/} + ${car.id}">Report Accident</a> </td>
+    </div>
     </tbody>
 
 

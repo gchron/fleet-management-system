@@ -135,7 +135,7 @@ public class CarController {
         return modelAndView;
     }
 
-    @PreAuthorize("hasRole('ADMINISTRATOR')")
+    @PreAuthorize("hasAnyRole('ADMINISTRATOR', 'DRIVER')")
     @GetMapping("/details/{carId}")
     public ModelAndView showCarDetails(@PathVariable Integer carId) {
         ModelAndView modelAndView = new ModelAndView("cars/details.html");
