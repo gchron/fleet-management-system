@@ -34,7 +34,7 @@
         <td><a th:href="@{../setTechnicalInspection?id=} + ${car.id}">Set Date of Next Technical Inspection</a></td>
     </div>
     <div sec:authorize="hasRole('DRIVER')">
-        <td><a th:href="@{cars/reportAccident/} + ${car.id}">Report Accident</a> </td>
+        <td><a th:href="@{../reportAccident?carId=} + ${car.id}">Report Accident</a> </td>
     </div>
     </tbody>
 

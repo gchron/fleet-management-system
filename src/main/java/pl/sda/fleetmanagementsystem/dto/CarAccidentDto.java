@@ -16,17 +16,19 @@ import java.time.LocalDate;
 public class CarAccidentDto {
 
     private Integer id;
-    private CarDto carDto;
-    private DriverDto driverDto;
+    //private CarDto carDto;
+    //private DriverDto driverDto;
     private LocalDate accidentDate;
     private String description;
+    private boolean settled;
 
     public CarAccident toEntity() {
         return CarAccident.builder()
-                .car(carDto.toEntity())
-                .driver(driverDto.toEntity())
+                //.car(carDto.toEntity())
+                //.driver(driverDto.toEntity())
                 .accidentDate(accidentDate)
                 .description(description)
+                .settled(settled)
                 .build();
 
     }

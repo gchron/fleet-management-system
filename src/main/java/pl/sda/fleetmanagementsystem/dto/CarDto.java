@@ -23,7 +23,7 @@ public class CarDto {
     private String productionYear;
     private String mileage;
     private Double engineCapacity;
-    private DriverDto driverDto;
+    //private DriverDto driverDto;
     private LocalDate dateOfNextInspection;
     private Set<CarAccidentDto> carAccidentsDtos;
 
@@ -35,7 +35,7 @@ public class CarDto {
                 .mileage(mileage)
                 .engineCapacity(engineCapacity)
                 .dateOfNextInspection(dateOfNextInspection)
-                .driver(driverDto!=null? driverDto.toEntity():null)
+                //.driver(driverDto!=null? driverDto.toEntity():null)
                 .carAccidents(carAccidentsDtos.stream().map(carAccidentDto -> carAccidentDto.toEntity()).collect(Collectors.toSet()))
                 .build();
     }

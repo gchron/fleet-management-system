@@ -4,15 +4,11 @@ package pl.sda.fleetmanagementsystem.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.sda.fleetmanagementsystem.dto.DriverAccidentAssignment;
 import pl.sda.fleetmanagementsystem.dto.DriverLicenseAssignmentDto;
 import pl.sda.fleetmanagementsystem.dto.DriverPetrolBillAssignmentDto;
-import pl.sda.fleetmanagementsystem.model.Driver;
-import pl.sda.fleetmanagementsystem.model.DrivingLicense;
-import pl.sda.fleetmanagementsystem.model.PetrolBill;
-import pl.sda.fleetmanagementsystem.repository.DriverRepository;
-import pl.sda.fleetmanagementsystem.repository.DrivingLicenseRepository;
-import pl.sda.fleetmanagementsystem.repository.PetrolBillRepository;
-import pl.sda.fleetmanagementsystem.repository.UserRepository;
+import pl.sda.fleetmanagementsystem.model.*;
+import pl.sda.fleetmanagementsystem.repository.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -26,6 +22,8 @@ public class DriverService {
     private final DrivingLicenseRepository drivingLicenseRepository;
     private final PetrolBillRepository petrolBillRepository;
     private final UserRepository userRepository;
+    private final CarRepository carRepository;
+    private final CarAccidentRepository carAccidentRepository;
 
 
     @Transactional
@@ -53,11 +51,29 @@ public class DriverService {
         petrolBill.setDate(LocalDate.parse(assignment.getDate()));
         petrolBill.setValue(BigDecimal.valueOf(assignment.getValue()));
         petrolBillRepository.save(petrolBill);
-        //driver.getBills().add(petrolBill);
+        driver.getBills().add(petrolBill);
 
 
     }
     protected Integer getId(Integer userId) {
-        return userRepository.findById(userId).orElseThrow(IllegalAccessError::new).toDto().getId();
+        return userRepository.findById(userId).orElseThrow(IllegalArgumentException::new).toDto().getId();
+    }
+
+    @Transactional
+    public void reportAccident(DriverAccidentAssignment assignment) {
+        CarAccident carAccident = new CarAccident();
+        Driver driver = driverRepository.findById(assignment.getDriverId()).orElseThrow(IllegalArgumentException::new);
+        Car car = carRepository.findById(assignment.getCarId()).orElseThrow(IllegalArgumentException::new);
+        carAccident.setCar(car);
+        carAccident.setDriver(driver);
+        carAccident.setAccidentDate(LocalDate.parse(assignment.getAccidentDate()));
+        carAccident.setDescription(assignment.getDescription());
+        carAccident.setSettled(false);
+        car.getCarAccidents().add(carAccident);
+        carAccidentRepository.save(carAccident);
+
+
+
+
     }
 }

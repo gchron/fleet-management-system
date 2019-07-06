@@ -1,18 +1,9 @@
 package pl.sda.fleetmanagementsystem.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import pl.sda.fleetmanagementsystem.dto.CarDto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -50,7 +41,7 @@ public class Car {
                 .mileage(mileage)
                 .engineCapacity(engineCapacity)
                 .dateOfNextInspection(dateOfNextInspection)
-                .driverDto(driver != null? driver.toDto():null)
+                //.driverDto(driver != null? driver.toDto():null)
                 .carAccidentsDtos(
                         carAccidents
                         .stream()

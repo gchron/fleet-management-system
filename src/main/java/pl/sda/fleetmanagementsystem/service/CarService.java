@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.sda.fleetmanagementsystem.dto.NewCarDto;
 import pl.sda.fleetmanagementsystem.dto.UpdateCarDto;
 import pl.sda.fleetmanagementsystem.model.Car;
+import pl.sda.fleetmanagementsystem.model.Driver;
 import pl.sda.fleetmanagementsystem.repository.CarRepository;
 import pl.sda.fleetmanagementsystem.repository.DriverRepository;
 
@@ -37,15 +38,16 @@ public class CarService {
 
     @Transactional
     public void setDriver(Integer carId, Integer driverId) {
-        carRepository.findById(carId)
-                .orElseThrow(IllegalArgumentException::new)
-                .setDriver(driverRepository.
-                        findById(driverId).orElseThrow(IllegalArgumentException::new));
+        Car car = carRepository.findById(carId).orElseThrow(IllegalArgumentException::new);
+        Driver driver = driverRepository.findById(driverId).orElseThrow(IllegalArgumentException::new);
+        car.setDriver(driver);
+        driver.getCars().add(car);
 
 
     }
+
     @Transactional
-    public  void setTechnicalInspection(Integer carId, String dateOfNextInspection){
+    public void setTechnicalInspection(Integer carId, String dateOfNextInspection) {
         Car car = carRepository.findById(carId).orElseThrow(IllegalArgumentException::new);
         car.setDateOfNextInspection(LocalDate.parse(dateOfNextInspection));
 
@@ -65,11 +67,8 @@ public class CarService {
         car.setProductionYear(carDto.getProductionYear());
 
 
-
     }
 
 
-
-
-    }
+}
 

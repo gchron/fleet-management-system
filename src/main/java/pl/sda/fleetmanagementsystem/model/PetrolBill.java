@@ -34,7 +34,7 @@ public class PetrolBill {
                 .value(value)
                 .date(date)
                 .settled(settled)
-                .driverDto(driver != null ? driver.toDto() : null)
+                //.driverDto(driver != null ? driver.toDto() : null)
                 .build();
     }
 }

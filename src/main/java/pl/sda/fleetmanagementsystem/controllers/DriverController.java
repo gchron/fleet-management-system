@@ -40,6 +40,7 @@ public class DriverController {
         return modelAndView;
     }
 
+
     @PreAuthorize("hasRole('ADMINISTRATOR')")
     @GetMapping("/{id}")
     ModelAndView showDriver(@PathVariable Integer id) {
@@ -150,6 +151,8 @@ public class DriverController {
         return "redirect:/";
 
     }
+
+
 
 
 }
