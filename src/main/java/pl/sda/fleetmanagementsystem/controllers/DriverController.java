@@ -79,11 +79,19 @@ public class DriverController {
     }
 
     @PreAuthorize("hasRole('DRIVER')")
-    @GetMapping("/{id}/showCars")
-    ModelAndView showCarsOfDriver(@PathVariable Integer id) {
-        ModelAndView modelAndView = new ModelAndView("drivers/showCars.html");
-        modelAndView.addObject("cars", carFinder.findByDriverId(id));
-        return modelAndView;
+    @GetMapping("/showCars")
+    String showCarsOfDriver(HttpServletRequest httpServletRequest, Model model) {
+        try {
+            Integer userId = userFinder.findByUserName(httpServletRequest.getUserPrincipal().getName()).getId();
+            Integer driverId = driverFinder.findByUserId(userId).getId();
+            model.addAttribute("cars", carFinder.findByDriverId(driverId));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/error";
+        }
+
+        return "drivers/showCars";
     }
 
     @PreAuthorize("hasRole('DRIVER')")
