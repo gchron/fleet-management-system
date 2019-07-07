@@ -150,7 +150,6 @@ public class CarController {
 
     }
 
-    //TODO Implement text area
     @PreAuthorize("hasRole('DRIVER')")
     @GetMapping("/reportAccident")
     String reportAccident(HttpServletRequest httpServletRequest, Model model, @RequestParam Integer carId) {
