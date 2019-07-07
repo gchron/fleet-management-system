@@ -11,6 +11,8 @@ import pl.sda.fleetmanagementsystem.repository.CarRepository;
 import pl.sda.fleetmanagementsystem.repository.DriverRepository;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 /**
  * @author Mariusz Kowalczuk
@@ -49,7 +51,16 @@ public class CarService {
     @Transactional
     public void setTechnicalInspection(Integer carId, String dateOfNextInspection) {
         Car car = carRepository.findById(carId).orElseThrow(IllegalArgumentException::new);
-        car.setDateOfNextInspection(LocalDate.parse(dateOfNextInspection));
+        String pattern = "yyyy-MM-dd";
+        //DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(pattern);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
+
+        LocalDate parse = LocalDate.parse(dateOfNextInspection, dateTimeFormatter);
+        car.setDateOfNextInspection(parse);
+
+
+
+        //car.setDateOfNextInspection(LocalDate.parse(dateOfNextInspection));
 
     }
 
