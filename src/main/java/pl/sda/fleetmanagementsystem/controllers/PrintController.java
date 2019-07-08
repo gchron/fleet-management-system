@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import pl.sda.fleetmanagementsystem.dto.PaymentDto;
 import pl.sda.fleetmanagementsystem.service.PaymentFinder;
 
 import javax.servlet.ServletContext;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
@@ -32,11 +34,15 @@ public class PrintController {
     private static final String DEFAULT_FILE_NAME = "java-tutorial.pdf";
 
 
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     @GetMapping("/{id}/createPDF")
     public void createPDF(@PathVariable Integer id) throws FileNotFoundException, DocumentException {
         PaymentDto paymentDto = paymentFinder.findById(id);
+        File file = new File(DIRECTORY);
         Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream("Payment.pdf"));
+        FileOutputStream fileOutputStream = new FileOutputStream(file, false);
+
+        PdfWriter.getInstance(document, fileOutputStream);
 
         document.open();
         Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
