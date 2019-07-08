@@ -4,14 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.sda.fleetmanagementsystem.dto.CreateUserAssignment;
-import pl.sda.fleetmanagementsystem.model.Administrator;
-import pl.sda.fleetmanagementsystem.model.Driver;
-import pl.sda.fleetmanagementsystem.model.User;
-import pl.sda.fleetmanagementsystem.model.UserRole;
-import pl.sda.fleetmanagementsystem.repository.AdministratorRepository;
-import pl.sda.fleetmanagementsystem.repository.DriverRepository;
-import pl.sda.fleetmanagementsystem.repository.RoleRepository;
-import pl.sda.fleetmanagementsystem.repository.UserRepository;
+import pl.sda.fleetmanagementsystem.model.*;
+import pl.sda.fleetmanagementsystem.repository.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -28,6 +22,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final AdministratorRepository administratorRepository;
+    private final ClientRepository clientRepository;
 
 
     public void register(CreateUserAssignment createUserAssignment){
@@ -61,6 +56,15 @@ public class UserService {
                                 .build();
                 administratorRepository.save(administrator);
                 break;
+            case 3:
+                Client client =
+                        Client.builder()
+                                .user(user)
+                                .build();
+                clientRepository.save(client);
+                break;
+
+
             default:
                 System.out.println("No such role");
         }

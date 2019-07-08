@@ -49,6 +49,9 @@
 <div sec:authorize="hasRole('DRIVER')">
     <a th:href="@{/drivers/showCars}">Show my cars</a>
 </div>
+<div sec:authorize="hasRole('CLIENT')">
+    <a th:href="@{/cars/showAvailableCars}">Show available cars</a>
+</div>
 
 
 </body>
