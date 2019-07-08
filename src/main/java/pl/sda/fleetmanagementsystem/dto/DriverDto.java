@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 import pl.sda.fleetmanagementsystem.model.Driver;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
@@ -34,6 +35,10 @@ public class DriverDto {
                 .bills(Optional.ofNullable(petrolBillDtos).map(Collection::stream).orElseGet(Stream::empty).map(PetrolBillDto::toEntity).collect(Collectors.toSet()))
                 .build();
 
+    }
+
+    public boolean isAvailable(){
+        return drivingLicenseDto.getExpireDate().isAfter(LocalDate.now());
     }
 
     public Integer getId() {

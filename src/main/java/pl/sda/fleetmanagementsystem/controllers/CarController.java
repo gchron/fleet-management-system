@@ -176,5 +176,17 @@ public class CarController {
 
     }
 
+    @PreAuthorize("hasRole('CLIENT')")
+    @GetMapping("/showAvailableCars")
+    ModelAndView showAvailableCars(){
+        ModelAndView modelAndView = new ModelAndView("cars/available.html");
+        modelAndView.addObject("cars", carFinder.findAvailableCars());
+        return modelAndView;
+
+
+    }
+
+
+
 }
 

@@ -27,7 +27,7 @@ public class CarDto {
     private LocalDate dateOfNextInspection;
     private Set<CarAccidentDto> carAccidentsDtos;
 
-    public Car toEntity(){
+    public Car toEntity() {
         return Car.builder()
                 .brand(brand)
                 .model(model)
@@ -38,6 +38,11 @@ public class CarDto {
                 //.driver(driverDto!=null? driverDto.toEntity():null)
                 .carAccidents(carAccidentsDtos.stream().map(carAccidentDto -> carAccidentDto.toEntity()).collect(Collectors.toSet()))
                 .build();
+    }
+
+    public boolean isAvailable() {
+        return (carAccidentsDtos.isEmpty()) || carAccidentsDtos.stream().allMatch(CarAccidentDto::isSettled);
+
     }
 
 
