@@ -15,9 +15,10 @@ import pl.sda.fleetmanagementsystem.dto.PaymentDto;
 import pl.sda.fleetmanagementsystem.service.PaymentFinder;
 
 import javax.servlet.ServletContext;
+import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * @author Mariusz Kowalczuk
@@ -30,19 +31,16 @@ public class PrintController {
 
     private final PaymentFinder paymentFinder;
 
-    private static final String DIRECTORY = "C:/PDF";
-    private static final String DEFAULT_FILE_NAME = "java-tutorial.pdf";
 
 
     @PreAuthorize("hasRole('ADMINISTRATOR')")
     @GetMapping("/{id}/createPDF")
-    public void createPDF(@PathVariable Integer id) throws FileNotFoundException, DocumentException {
+    public void createPDF(@PathVariable Integer id) throws IOException, DocumentException {
         PaymentDto paymentDto = paymentFinder.findById(id);
-        File file = new File(DIRECTORY);
         Document document = new Document();
-        FileOutputStream fileOutputStream = new FileOutputStream(file, false);
+        BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(new File("/newPayment.pdf")));
+        PdfWriter.getInstance(document, bufferedOutputStream);
 
-        PdfWriter.getInstance(document, fileOutputStream);
 
         document.open();
         Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);

@@ -29,7 +29,7 @@ public class Car {
     @ManyToOne
     private Driver driver;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<CarAccident> carAccidents;
 
     public CarDto toDto() {
@@ -42,11 +42,11 @@ public class Car {
                 .engineCapacity(engineCapacity)
                 .dateOfNextInspection(dateOfNextInspection)
                 //.driverDto(driver != null? driver.toDto():null)
-                .carAccidentsDtos(
+                .carAccidentsDtos(carAccidents != null?
                         carAccidents
                         .stream()
                         .map(carAccident -> carAccident.toDto())
-                                .collect(Collectors.toSet()))
+                                .collect(Collectors.toSet()):null)
                 .build();
 
     }
