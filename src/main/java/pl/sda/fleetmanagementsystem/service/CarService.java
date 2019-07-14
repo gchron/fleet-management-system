@@ -11,6 +11,8 @@ import pl.sda.fleetmanagementsystem.repository.CarRepository;
 import pl.sda.fleetmanagementsystem.repository.DriverRepository;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Mariusz Kowalczuk
@@ -41,9 +43,8 @@ public class CarService {
         Car car = carRepository.findById(carId).orElseThrow(IllegalArgumentException::new);
         Driver driver = driverRepository.findById(driverId).orElseThrow(IllegalArgumentException::new);
         car.setDriver(driver);
-        driver.getCars().add(car);
-
-
+        Set<Car> cars = driver.getCars()!=null?driver.getCars():new HashSet<>();
+        cars.add(car);
     }
 
     @Transactional

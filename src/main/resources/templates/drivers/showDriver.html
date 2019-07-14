@@ -17,8 +17,8 @@
     <tbody>
     <tr>
         <td th:text="${driver.getUserDto().getUserName()}"><td>
-        <td th:text="${driver.getDrivingLicenseDto().getNumber()}"><td>
-        <td th:text="${driver.getDrivingLicenseDto().getExpireDate()}"><td>
+        <td th:text="${driver.getDrivingLicenseDto()!=null? driver.getDrivingLicenseDto().getNumber():null}"><td>
+        <td th:text="${driver.getDrivingLicenseDto()!=null? driver.getDrivingLicenseDto().getExpireDate():null}"><td>
         <td><a th:href="@{../drivers/} + ${driver.id}">Add car</a></td>
         <td><a th:href="@{../drivers/preparePayment?driverId=} + ${driver.id}">Prepare Payment</a></td>
 
