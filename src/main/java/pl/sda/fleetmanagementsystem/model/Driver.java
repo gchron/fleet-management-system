@@ -29,10 +29,10 @@ public class Driver {
     @OneToOne
     private DrivingLicense drivingLicense;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<Car> cars;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<PetrolBill> bills;
 
     public DriverDto toDto(){

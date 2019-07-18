@@ -33,7 +33,7 @@ public class CarFinder {
     }
 
     public Set<CarDto> findByDriverId(Integer driverId) {
-        return carRepository.findByDriverId(driverId).stream().map(Car::toDto).collect(Collectors.toSet());
+        return carRepository.findByDriver_Id(driverId).stream().map(Car::toDto).collect(Collectors.toSet());
 
     }
 

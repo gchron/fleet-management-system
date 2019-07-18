@@ -11,5 +11,6 @@ import java.util.Set;
 public interface CarRepository extends JpaRepository<Car, Integer> {
 
     Set<Car> findByDriverId(Integer driverId);
+    Set<Car> findByDriver_Id(Integer driverId);
 
 }
