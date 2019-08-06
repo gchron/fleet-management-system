@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title></title>
+</head>
+<body>
+Payment value: <a th:text="${value}">
+
+</a>
+<form th:action="@{/drivers/preparePayment}" method="POST" th:object="${assignment}">
+    <tr><td></td><td><input type="hidden" id="driverId" name="driverId" th:value="${driverId}"/></td></tr>
+    <tr><td></td><td><input type="hidden" id="value" name="value" th:value="${value}"/></td></tr>
+
+    <button type="submit">Przygotuj rozliczenie</button>
+</form>
+
+
+</body>
+</html>

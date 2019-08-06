@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title></title>
+</head>
+<body>
+<h1></h1>
+
+<form th:action="@{/cars/reportAccident}" method="POST" th:object="${assignment}">
+    <label>Description</label>
+    <textarea id="description" name="description" th:value="${description}">
+    </textarea>
+    <table>
+        <tr><td></td><td><input type="hidden" id="driverId" name="driverId" th:value="${driverId}"/></td></tr>
+        <tr><td></td><td><input type="hidden" id="carId" name="carId" th:value="${carId}"/></td></tr>
+        <tr><td>Date of Accident</td><td><input type="date" id="accidentDate" name="accidentDate" th:value="${accidentDate}"/></td></tr>
+
+
+        <tr><td></td><td> <button type="submit">Submit</button></td></tr>
+    </table>
+</form>
+
+
+</body>
+</html>

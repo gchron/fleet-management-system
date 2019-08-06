@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title></title>
+</head>
+<body>
+<form th:action="@{/cars/deleteFromList}" th:method="POST" th:object="${assignment}">
+    <select th:field="*{carId}">
+        <option th:each="car : ${cars}" th:value="${car.id}" th:text="${car}"/>
+    </select>
+    <input type="hidden" id="carId" name="carId" th:value="${assignment.carId}">
+    <button type="submit">Usuń</button>
+
+
+</form>
+
+
+</body>
+</html>
