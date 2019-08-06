@@ -28,8 +28,9 @@ public class CarFinder {
         return carRepository.findAll().stream().map(Car::toDto).collect(Collectors.toSet());
     }
 
-    public CarDto findById(Integer carId) {
-        return carRepository.findById(carId).map(Car::toDto).orElseThrow(IllegalArgumentException::new);
+
+    public CarDto findById(Integer carId){
+        return carRepository.findById(carId).map(Car::toDto).orElseThrow(IllegalStateException::new);
     }
 
     public Set<CarDto> findByDriverId(Integer driverId) {

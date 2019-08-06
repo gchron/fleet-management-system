@@ -24,7 +24,7 @@ public class CarService {
     private final CarRepository carRepository;
     private final DriverRepository driverRepository;
 
-    public void create(NewCarDto carDto) {
+    public Car create(NewCarDto carDto) {
         Car car = Car.builder()
                 .brand(carDto.getBrand())
                 .model(carDto.getModel())
@@ -34,7 +34,7 @@ public class CarService {
                 .build();
 
         carRepository.save(car);
-        System.out.println("zapisano");
+        return car;
     }
 
 

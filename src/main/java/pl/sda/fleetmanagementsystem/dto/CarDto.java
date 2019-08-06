@@ -5,7 +5,6 @@ import pl.sda.fleetmanagementsystem.model.Car;
 
 import java.time.LocalDate;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * @author Mariusz Kowalczuk
@@ -36,7 +35,7 @@ public class CarDto {
                 .engineCapacity(engineCapacity)
                 .dateOfNextInspection(dateOfNextInspection)
                 //.driver(driverDto!=null? driverDto.toEntity():null)
-                .carAccidents(carAccidentsDtos.stream().map(carAccidentDto -> carAccidentDto.toEntity()).collect(Collectors.toSet()))
+//                .carAccidents(carAccidentsDtos.stream().map(carAccidentDto -> carAccidentDto.toEntity()).collect(Collectors.toSet()))
                 .build();
     }
 

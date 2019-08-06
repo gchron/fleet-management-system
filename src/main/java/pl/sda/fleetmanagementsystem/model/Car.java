@@ -6,7 +6,6 @@ import pl.sda.fleetmanagementsystem.dto.CarDto;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -42,11 +41,11 @@ public class Car {
                 .engineCapacity(engineCapacity)
                 .dateOfNextInspection(dateOfNextInspection)
                 //.driverDto(driver != null? driver.toDto():null)
-                .carAccidentsDtos(carAccidents != null?
-                        carAccidents
-                        .stream()
-                        .map(carAccident -> carAccident.toDto())
-                                .collect(Collectors.toSet()):null)
+//                .carAccidentsDtos(carAccidents != null?
+//                        carAccidents
+//                        .stream()
+//                        .map(carAccident -> carAccident.toDto())
+//                                .collect(Collectors.toSet()):null)
                 .build();
 
     }
