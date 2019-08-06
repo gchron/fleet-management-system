@@ -29,10 +29,10 @@ public class Driver {
     @OneToOne
     private DrivingLicense drivingLicense;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<Car> cars;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<PetrolBill> bills;
 
     public DriverDto toDto(){
@@ -40,8 +40,8 @@ public class Driver {
                 .id(id)
                 .userDto(user!= null? user.toDto(): null)
                 .drivingLicenseDto(drivingLicense != null? drivingLicense.toDto():null)
-                .carsDtos(cars.stream().map(car -> car.toDto()).collect(Collectors.toSet()))
-                .petrolBillDtos(bills.stream().map(PetrolBill::toDto).collect(Collectors.toSet()))
+                .carsDtos(cars!= null? cars.stream().map(car -> car.toDto()).collect(Collectors.toSet()):null)
+                .petrolBillDtos(bills!= null? bills.stream().map(PetrolBill::toDto).collect(Collectors.toSet()):null)
                 .build();
 
 

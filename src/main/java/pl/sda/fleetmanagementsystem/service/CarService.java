@@ -11,8 +11,8 @@ import pl.sda.fleetmanagementsystem.repository.CarRepository;
 import pl.sda.fleetmanagementsystem.repository.DriverRepository;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Mariusz Kowalczuk
@@ -24,7 +24,7 @@ public class CarService {
     private final CarRepository carRepository;
     private final DriverRepository driverRepository;
 
-    public void create(NewCarDto carDto) {
+    public Car create(NewCarDto carDto) {
         Car car = Car.builder()
                 .brand(carDto.getBrand())
                 .model(carDto.getModel())
@@ -34,7 +34,7 @@ public class CarService {
                 .build();
 
         carRepository.save(car);
-        System.out.println("zapisano");
+        return car;
     }
 
 
@@ -43,25 +43,15 @@ public class CarService {
         Car car = carRepository.findById(carId).orElseThrow(IllegalArgumentException::new);
         Driver driver = driverRepository.findById(driverId).orElseThrow(IllegalArgumentException::new);
         car.setDriver(driver);
-        driver.getCars().add(car);
-
-
+        Set<Car> cars = driver.getCars()!=null?driver.getCars():new HashSet<>();
+        cars.add(car);
     }
 
     @Transactional
     public void setTechnicalInspection(Integer carId, String dateOfNextInspection) {
         Car car = carRepository.findById(carId).orElseThrow(IllegalArgumentException::new);
-        String pattern = "yyyy-MM-dd";
-        //DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(pattern);
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
 
-        LocalDate parse = LocalDate.parse(dateOfNextInspection, dateTimeFormatter);
-        car.setDateOfNextInspection(parse);
-
-
-
-        //car.setDateOfNextInspection(LocalDate.parse(dateOfNextInspection));
-
+        car.setDateOfNextInspection(LocalDate.parse(dateOfNextInspection));
     }
 
     public void delete(Integer carId) {
@@ -78,8 +68,6 @@ public class CarService {
         car.setProductionYear(carDto.getProductionYear());
 
     }
-
-
 
 
 }

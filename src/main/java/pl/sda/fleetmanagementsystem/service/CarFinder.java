@@ -28,12 +28,13 @@ public class CarFinder {
         return carRepository.findAll().stream().map(Car::toDto).collect(Collectors.toSet());
     }
 
-    public CarDto findById(Integer carId) {
-        return carRepository.findById(carId).map(Car::toDto).orElseThrow(IllegalArgumentException::new);
+
+    public CarDto findById(Integer carId){
+        return carRepository.findById(carId).map(Car::toDto).orElseThrow(IllegalStateException::new);
     }
 
     public Set<CarDto> findByDriverId(Integer driverId) {
-        return carRepository.findByDriverId(driverId).stream().map(Car::toDto).collect(Collectors.toSet());
+        return carRepository.findByDriver_Id(driverId).stream().map(Car::toDto).collect(Collectors.toSet());
 
     }
 
