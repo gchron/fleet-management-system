@@ -96,7 +96,7 @@ class CarFinderTest extends Specification {
         carFinder.findById(5)
 
         then:
-        def error = thrown(IllegalArgumentException)
+        def error = thrown(IllegalStateException)
 
     }
 
