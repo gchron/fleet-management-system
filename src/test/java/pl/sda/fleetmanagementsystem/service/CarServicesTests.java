@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * @author Mariusz Kowalczuk
@@ -90,22 +90,41 @@ public class CarServicesTests {
 
     }
 
+
     @Test
-    public void settingUpDriverShouldMarkDriverOfACarAndAddCarToListOfCarsOfDRiver() {
+    public void deleteShouldDeleteCar() {
         Car car1 = new Car();
         car1.setId(1);
         car1.setModel("Golf");
         Car car2 = new Car();
         car2.setId(2);
         car2.setModel("Fox");
-        List<CarDto> cars = new ArrayList<>();
-        cars.add(car1.toDto());
-        cars.add(car2.toDto());
+        List<Car> cars = new ArrayList<>();
+        cars.add(car1);
+        cars.add(car2);
         when(carRepository.save(car1)).thenReturn(car1);
         when(carRepository.save(car2)).thenReturn(car2);
-        Car savedCar1 = carService.create(NewCarDto.builder().model("Golf").build());
-        Car savedCar2 = carService.create(NewCarDto.builder().model("Fox").build());
-        savedCar1.setId(1);
-        savedCar2.setId(2);
+        when(carRepository.findById(1)).thenReturn(Optional.of(cars.get(0)));
+
+//        when(carRepository.findById(1)).thenReturn(Optional.of(cars.get(0)));
+//
+        when(carRepository.findAll()).thenReturn(cars);
+        doNothing().when(carRepository).delete(car1);
+        cars.remove(car1);
+
+        Car car3 = carService.create(NewCarDto.builder().model("Golf").build());
+        Car car4 = carService.create(NewCarDto.builder().model("Fox").build());
+        car3.setId(1);
+        carService.delete(1);
+        verify(carRepository).delete(car1);
+        Assert.assertEquals(1, carRepository.findAll().size());
+
+
     }
+
+
 }
+
+   
+
+
